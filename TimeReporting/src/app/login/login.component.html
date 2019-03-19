@@ -1,17 +1,19 @@
 
-  <form class="login-form">
+  <form class="login-form" >
       <h1 class="login-title">
       Please log in!
     </h1>
+    <p [(ngModel)]="message" id="messagelogin" name="message" class="text-danger" >{{message}}</p>
     <div >
       <label class="col-form-label">Username: </label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
     </div>
     <br>
     <div class="form-field">
       <label>Password: </label>
-      <input type="password" name="password" class="form-control">
+      <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
     </div>
     <br>
-    <button class="btn btn-success form-control" type="submit">Log in</button>
+    <button class="btn btn-success form-control" type="submit" (click)="loginUser()">Log in</button><br><br>
+    <button class="btn btn-block btn-default form-control">Create user</button>
   </form>
