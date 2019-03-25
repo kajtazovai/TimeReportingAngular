@@ -1,9 +1,10 @@
 .login-form{
-    width: 280px;
+    width: 300px;
     margin: 0 auto;
     padding: 30px;
-    background-color: cornflowerblue;
+    background-color: aliceblue;
     margin-top: 150px;
+    border: 3px  dotted black;
 }
 legend{
     font-size: 20px;
@@ -15,5 +16,5 @@ legend{
     height: 1000px;
 }
 .login-title{
-    color:beige;
+    color:black;
 }

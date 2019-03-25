@@ -3,17 +3,17 @@
       <h1 class="login-title">
       Please log in!
     </h1>
-    <p [(ngModel)]="message" id="messagelogin" name="message" class="text-danger" >{{message}}</p>
-    <div >
+    <p [(ngModel)]="message" id="messagelogin" name="message" class="text-danger" ngDefaultControl>{{message}}</p>
+    <div class="form-field">
       <label class="col-form-label">Username: </label>
-      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="username">
     </div>
     <br>
     <div class="form-field">
       <label>Password: </label>
-      <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+      <input  placeholder="password" type="password" name="password" id="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
     </div>
     <br>
     <button class="btn btn-success form-control" type="submit" (click)="loginUser()">Log in</button><br><br>
-    <button class="btn btn-block btn-default form-control">Create user</button>
+    <button class="btn btn-block btn-default form-control" routerLink="/create">Create user</button>
   </form>

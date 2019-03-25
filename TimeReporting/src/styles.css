@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-color: grey;
-}
+    background-image:url("app/resources/3D-DNA-Wide-Wallpaper-2560x1600.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }

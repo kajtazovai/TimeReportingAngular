@@ -1,10 +1,50 @@
-<form>
-    <label>First Name</label>
-    <input type="text" name="firstname" [(ngModel)]="firstname">
-    <label>Last Name</label>
-    <input type="text" name="lastname" [(ngModel)]="lastname">
-    <label>Embg</label>
-    <input type="text" name="embg" [(ngModel)]="embg">
-    <label>Date Joining</label>
-    <input type="text" name="datejoining" [(ngModel)]="datejoining">
+<form class="login-form">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-field">
+                <label class="form-group">First Name</label>
+                <input placeholder="First Name" class="form-group  form-control" type="text" name="firstname"
+                    [(ngModel)]="firstname">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Last Name</label>
+                <input placeholder="Last Name" class="form-group form-control" type="text" name="lastname"
+                    [(ngModel)]="lastname">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Embg</label><br>
+                <input placeholder="ex.0305961487017" class="form-group form-control" type="text" name="embg"
+                    [(ngModel)]="embg">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Date of Joining</label><br>
+                <input placeholder="ex.22/03/2019" class="form-group form-control" type="text" name="datejoining"
+                    [(ngModel)]="datejoining">
+            </div>  
+        </div>
+        <div class="col-md-6">
+            <div class="form-field">
+                <label class="form-group">Email</label><br>
+                <input placeholder="ex.petko@mail.com" class="form-group form-control" type="text" name="email"
+                    [(ngModel)]="email">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Username</label><br>
+                <input placeholder="ex.user12" class="form-group form-control" type="text" name="username"
+                    [(ngModel)]="username">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Password</label><br>
+                <input placeholder="ex.password" class="form-group form-control" type="password" name="password"
+                    [(ngModel)]="password">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Role</label><br>
+                <input placeholder="ex.(1)-Programer" class="form-group form-control" type="text" name="role"
+                    [(ngModel)]="role">
+            </div>
+
+        </div>
+    </div>
+    <button class="btn btn-block btn-success form-control" (click)="createUser()">Create user</button>
 </form>
