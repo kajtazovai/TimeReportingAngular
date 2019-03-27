@@ -8,19 +8,24 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { TimereportingComponent } from './timereporting/timereporting.component';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    TimereportingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
   ],
-  providers: [UserService],
+  providers: [UserService,FormsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {
