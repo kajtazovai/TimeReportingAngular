@@ -18,7 +18,7 @@ export class UserService {
         'responseType':'text'
      });
    }
-   createUser(firstname:string,lastname:string,embg:string,datejoining:Date,username:string,password:string,email:string,role:number):Observable<Object>{
+   createUser(firstname:string,lastname:string,embg:string,datejoining:Date,username:string,password:string,email:string,role:number,rolename:string):Observable<Object>{
      return this.http.post('http://localhost:8080/employee/create',{
           "firstName":firstname,
           "lastName":lastname,
@@ -28,7 +28,8 @@ export class UserService {
           "password":password,
           "email":email,
           "role":{
-            "id":role
+            "id":role,
+            "name":rolename
           }
      },{
        responseType:"arraybuffer"

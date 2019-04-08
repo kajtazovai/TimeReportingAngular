@@ -15,13 +15,14 @@ export class CreateUserComponent implements OnInit {
   email:string;
   datejoining:Date;
   role:number;
+  rolename:string;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
-  createUser(firstname,lastname,embg,username,password,datejoining){
-      this.userService.createUser(this.firstname,this.lastname,this.embg,this.datejoining,this.username,this.password,this.email,this.role).subscribe(data=>{
-        if(firstname!="" && lastname!="" && embg!="" && username!=""&& password!=""&& datejoining!="")
+  createUser(firstname,lastname,embg,username,password,datejoining,role,rolename){
+      this.userService.createUser(this.firstname,this.lastname,this.embg,this.datejoining,this.username,this.password,this.email,this.role, this.rolename).subscribe(data=>{
+        if(firstname!="" && lastname!="" && embg!="" && username!=""&& password!=""&& datejoining!="" && role!="" && rolename!="")
         {
           alert("Successfull create user");
         }
@@ -31,5 +32,6 @@ export class CreateUserComponent implements OnInit {
       })
     
   }
+
 
 }

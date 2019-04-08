@@ -18,7 +18,7 @@
             </div>
             <div class="form-field">
                 <label class="form-group">Date of Joining</label><br>
-                <input placeholder="ex.22/03/2019" class="form-group form-control" type="text" name="datejoining"
+                <input placeholder="ex.22/03/2019" class="form-group form-control" type="date" name="datejoining"
                     [(ngModel)]="datejoining">
             </div>  
         </div>
@@ -40,8 +40,13 @@
             </div>
             <div class="form-field">
                 <label class="form-group">Role</label><br>
-                <input placeholder="ex.(1)-Programer" class="form-group form-control" type="text" name="role"
+                <input placeholder="ex.(1)-Programer" class="form-group form-control"  type="number" name="role"
                     [(ngModel)]="role">
+            </div>
+            <div class="form-field">
+                <label class="form-group">Role name</label><br>
+                <input placeholder="ex.(1)-Programer" class="form-group form-control"  type="text" name="rolename"
+                    [(ngModel)]="rolename">
             </div>
 
         </div>
