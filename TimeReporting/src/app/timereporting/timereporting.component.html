@@ -1,17 +1,12 @@
-<div class="timereportsDays" onload="setDaysOfMonth('2019-03')">
-    <div class="calendarTimereport">
-        <dl-date-time-picker
-        startView="day"
-        maxView="year"
-        minView="minute"
-        minuteStep="5"
-        [(ngModel)]="selectedDate"
-    >
-    </dl-date-time-picker>
-    
-    <input [(ngModel)]="selectedDate">
-    </div>
-  <button (click)="setDaysOfMonth('2019-03')">Generate Days</button>
+
+<div class="timereportsDays">
+  <div id="addRow"><input class="form-control" type="date" [(ngModel)]="date"><br>
+  <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
+    <select class="form-control">
+      <option *ngFor="let project of projects">{{project.name}}</option>
+    </select>
+
+  <button class="form-control btn btn-success" (click)="addTimereport()">Add</button></div>
   <table class="table table-bordered table-dark table-striped">
     <thead>
       <tr>
@@ -22,11 +17,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let days of arrayDays">
-        <td>{{days}}</td>
-        <td></td>
-        <td></td>
-        <td><button class="btn btn-success btn-block">Add</button></td>
+      <tr *ngFor="let timereport of timereports" >
+        <td>{{timereport.date}}</td>
+        <td>{{timereport.hours}}</td>
+        <td>{{timereport.project}}</td>
       </tr>
     </tbody>
   </table>

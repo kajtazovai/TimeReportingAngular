@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import {Timereport} from "../models/timereport";
+import {Project} from "../models/project";
+
 
 @Component({
   selector: 'app-timereporting',
@@ -7,19 +10,21 @@ import * as moment from 'moment';
   styleUrls: ['./timereporting.component.css']
 })
 export class TimereportingComponent implements OnInit {
-  constructor() { }
-  arrayDays: Array<number>;
-  days: number;
+  timereports: Array<Timereport>;
+  hours:number;
+  date:Date;
+  projects:Array<Project>;
   selectedDate:Date;
   ngOnInit() {
-    this.arrayDays = new Array();
+    this.timereports = new Array<Timereport>();
+    this.projects = new Array<Project>();
   }
-  setDaysOfMonth($month) {
-    this.days = moment($month).daysInMonth();
-    this.arrayDays = new Array(this.days);
-    for (var i = 1; i <= this.days; i++) {
-      this.arrayDays[i] = i;
-    }
+  addTimereport(){
+    this.timereports.push(new Timereport(this.date,this.hours,this.projects.pop()));
   }
+
+
+  
+  
 
 }
