@@ -2,17 +2,15 @@
 <div class="timereportsDays">
   <div id="addRow"><input class="form-control" type="date" [(ngModel)]="date"><br>
   <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
-    <select class="form-control">
-      <option *ngFor="let project of projects">{{project.name}}</option>
-    </select>
-
-  <button class="form-control btn btn-success" (click)="addTimereport()">Add</button></div>
+    <input class="form-control" type="number" [(ngModel)]="employeeId" placeholder="Employee id"><br>
+    <input class="form-control" type="number" [(ngModel)]="projectId" placeholder="Project id"><br>
+  <button class="form-control btn btn-success" (click)="createTime()">Add</button></div>
   <table class="table table-bordered table-dark table-striped">
     <thead>
       <tr>
         <th>Day</th>
         <th>Hours</th>
-        <th>Project</th>
+        <th></th>
         <td></td>
       </tr>
     </thead>
@@ -20,7 +18,7 @@
       <tr *ngFor="let timereport of timereports" >
         <td>{{timereport.date}}</td>
         <td>{{timereport.hours}}</td>
-        <td>{{timereport.project}}</td>
+        <td><button class="btn btn-default">Edit</button> <button class="btn btn-danger">Delete</button></td>
       </tr>
     </tbody>
   </table>

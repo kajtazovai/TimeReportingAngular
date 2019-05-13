@@ -1,10 +1,20 @@
-import {Project} from "./project";
+import { Employee } from './employee';
 
 export class Timereport {
 
     private _date: Date;
     private _hours: number;
-    private _project:Project;
+    private _employeeId:number;
+    private  _projectId:number;
+
+
+  constructor(date: Date, hours: number,employeeId:number,projectId:number) {
+    this._date = date;
+    this._hours = hours;
+    this._employeeId = employeeId;
+    this._projectId = projectId;
+  
+  }
 
   get date(): Date {
     return this._date;
@@ -23,17 +33,5 @@ export class Timereport {
   }
 
 
-  get project(): Project {
-    return this._project;
-  }
-
-  set project(value: Project) {
-    this._project = value;
-  }
-
-  constructor(date: Date, hours: number, project: Project) {
-    this._date = date;
-    this._hours = hours;
-    this._project = project;
-  }
+ 
 }

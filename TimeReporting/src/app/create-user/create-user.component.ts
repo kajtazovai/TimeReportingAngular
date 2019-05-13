@@ -16,12 +16,13 @@ export class CreateUserComponent implements OnInit {
   datejoining:Date;
   role:number;
   rolename:string;
+  projectId:number;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
   createUser(firstname,lastname,embg,username,password,datejoining,role,rolename){
-      this.userService.createUser(this.firstname,this.lastname,this.embg,this.datejoining,this.username,this.password,this.email,this.role, this.rolename).subscribe(data=>{
+      this.userService.createUser(this.firstname,this.lastname,this.embg,this.datejoining,this.username,this.password,this.email,this.role, this.rolename,this.projectId).subscribe(data=>{
         if(firstname!="" && lastname!="" && embg!="" && username!=""&& password!=""&& datejoining!="" && role!="" && rolename!="")
         {
           alert("Successfull create user");

@@ -11,6 +11,10 @@ import { TimereportingComponent } from './timereporting/timereporting.component'
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { ProjectComponent } from './project/project.component';
 import {ProjectService} from "./services/project.service";
+import { NewtimereportComponent } from './newtimereport/newtimereport.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+//import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+//import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import {ProjectService} from "./services/project.service";
     LoginComponent,
     CreateUserComponent,
     TimereportingComponent,
-    ProjectComponent
+    ProjectComponent,
+    NewtimereportComponent,
+    // MatButtonModule,
+    // MatCheckboxModule,
+    //MatDialogModule
   ],
   imports: [
     BrowserModule,
@@ -27,6 +35,7 @@ import {ProjectService} from "./services/project.service";
     HttpClientModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent]
