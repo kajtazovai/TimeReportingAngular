@@ -1,25 +1,22 @@
 
 <div class="timereportsDays">
-  <div id="addRow"><input class="form-control" type="date" [(ngModel)]="date"><br>
-  <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
-    <input class="form-control" type="number" [(ngModel)]="employeeId" placeholder="Employee id"><br>
-    <input class="form-control" type="number" [(ngModel)]="projectId" placeholder="Project id"><br>
-  <button class="form-control btn btn-success" (click)="createTime()">Add</button></div>
-  <table class="table table-bordered table-dark table-striped">
+  <button mat-raised-button (click)="onCreate()" ><mat-icon>add</mat-icon>Create</button>
+  <table class="table table-bordered mat-table" >
     <thead>
-      <tr>
-        <th>Day</th>
-        <th>Hours</th>
-        <th></th>
-        <td></td>
-      </tr>
+    <tr>
+      <th>Hours</th>
+      <th>Employee</th>
+      <th>Project</th>
+      <td></td>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let timereport of timereports" >
-        <td>{{timereport.date}}</td>
-        <td>{{timereport.hours}}</td>
-        <td><button class="btn btn-default">Edit</button> <button class="btn btn-danger">Delete</button></td>
-      </tr>
+    <tr *ngFor="let timereport of timereports" >
+      <td>{{timereport.hours}}</td>
+      <td>{{timereport.employeeId}}</td>
+      <td> {{timereport.projectId}}</td>
+      <td><button class="btn btn-default">Edit</button> <button class="btn btn-danger">Delete</button></td>
+    </tr>
     </tbody>
   </table>
 </div>

@@ -1,0 +1,17 @@
+
+<div class="timereportsDays mat-dialog-container">
+  <div id="addRow"><input class="form-control" type="date" [(ngModel)]="date"><br>
+    <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
+    <select class="form-control" [(ngModel)]="employeeId" >
+        <option *ngFor="let employee of employees" [value]="employee.id">{{employee.firstName}}</option>
+    </select>
+    <select class="form-control" [(ngModel)]="projectId">
+      <option *ngFor="let project of projects" [value]="project.id">{{project.name}}</option>
+    </select>
+    <div class="row">
+      <div class="col-md-6"><button class="form-control btn btn-success" (click)="createTime()">Add</button></div>
+      <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
+
+    </div>
+  </div>
+</div>

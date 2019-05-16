@@ -19,4 +19,7 @@ export class ProjectService {
 
     return this.http.post("http://localhost:8080/projects/create",body);
   }
+  getProjects(){
+    return this.http.get("http://localhost:8080/projects");
+  }
 }

@@ -4,12 +4,27 @@ export class Timereport {
 
     private _date: Date;
     private _hours: number;
-    private _employeeId:number;
-    private  _projectId:number;
+    private _employeeId :number;
+    private _projectId:number;
 
 
-  constructor(date: Date, hours: number,employeeId:number,projectId:number) {
-    this._date = date;
+  get employeeId(): number {
+    return this._employeeId;
+  }
+
+  set employeeId(value: number) {
+    this._employeeId = value;
+  }
+
+  get projectId(): number {
+    return this._projectId;
+  }
+
+  set projectId(value: number) {
+    this._projectId = value;
+  }
+
+  constructor(hours: number,employeeId:number,projectId:number) {
     this._hours = hours;
     this._employeeId = employeeId;
     this._projectId = projectId;

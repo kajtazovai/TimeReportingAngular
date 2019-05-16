@@ -13,8 +13,10 @@ import { ProjectComponent } from './project/project.component';
 import {ProjectService} from "./services/project.service";
 import { NewtimereportComponent } from './newtimereport/newtimereport.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-//import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-//import {MatDialogModule} from '@angular/material/dialog';
+import { MaterialModule } from './material.module';
+import {MatIconModule} from "@angular/material";
+
+
 
 @NgModule({
   declarations: [
@@ -23,10 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CreateUserComponent,
     TimereportingComponent,
     ProjectComponent,
-    NewtimereportComponent,
-    // MatButtonModule,
-    // MatCheckboxModule,
-    //MatDialogModule
+    NewtimereportComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +34,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HttpClientModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatIconModule
+
+
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[NewtimereportComponent]
 })
 export class AppModule {
     

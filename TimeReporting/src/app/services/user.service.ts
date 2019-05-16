@@ -37,5 +37,11 @@ export class UserService {
      },{
        responseType:"arraybuffer"
      });
+
+   }
+   getUsers(){
+     return this.http.get("http://localhost:8080/employee",{
+       'responseType':'text'
+     });
    }
 }

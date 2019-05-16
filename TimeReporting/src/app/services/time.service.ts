@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 export class TimeService {
 
   constructor(private http:HttpClient) { }
-  createTime(date:Date,hours:number,projectId:number,employeeId:number):Observable<Object> {
+  createTime(date:Date,hours:number,employeeId:number,projectId:number):Observable<Object> {
     return this.http.post("http://localhost:8080/timereports/create",{
       "date":date,
       "hours":hours,
@@ -19,6 +19,11 @@ export class TimeService {
         "id":projectId
       },
     },{
+      'responseType':'text'
+    });
+  }
+  getTimereports():Observable<Object>{
+    return this.http.get("http://localhost:8080/timereports",{
       'responseType':'text'
     });
   }
