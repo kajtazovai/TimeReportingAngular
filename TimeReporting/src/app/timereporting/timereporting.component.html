@@ -1,7 +1,13 @@
 
 <div class="timereportsDays">
   <button mat-raised-button (click)="onCreate()" ><mat-icon>add</mat-icon>Create</button>
-  <table class="table table-bordered mat-table" >
+  <mat-form-field class="calendarreport">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button class="btn btn-success ">Search</button>
+  <table class="table table-bordered mat-table timereportsTable" >
     <thead>
     <tr>
       <th>Hours</th>
@@ -13,9 +19,9 @@
     <tbody>
     <tr *ngFor="let timereport of timereports" >
       <td>{{timereport.hours}}</td>
-      <td>{{timereport.employeeId}}</td>
-      <td> {{timereport.projectId}}</td>
-      <td><button class="btn btn-default">Edit</button> <button class="btn btn-danger">Delete</button></td>
+      <td>{{timereport.employeeName}}</td>
+      <td> {{timereport.projectName}}</td>
+      <td><button class="btn btn-default" routerLink="/edit" id="{{timereport.id}}" (click)="editTimereport(timereport.id)">Edit</button> <button class="btn btn-danger" (click)="deleteTimereport(timereport.id)">Delete</button></td>
     </tr>
     </tbody>
   </table>

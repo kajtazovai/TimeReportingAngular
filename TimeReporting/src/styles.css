@@ -2,7 +2,7 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~@material/dialog/dist/mdc.dialog.css";
 body {
-  background-image: url("app/resources/3D-DNA-Wide-Wallpaper-2560x1600.jpg");
+  background-color: gainsboro;
   background-repeat: no-repeat;
   background-size: 100%;
 }

@@ -4,13 +4,15 @@ import {LoginComponent} from './login/login.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {TimereportingComponent} from './timereporting/timereporting.component';
 import {ProjectComponent} from "./project/project.component";
+import {EditTimereportComponent} from "./edit-timereport/edit-timereport.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'create', component: CreateUserComponent},
   {path: 'timereport', component: TimereportingComponent},
-  {path: 'projects', component: ProjectComponent}
+  {path: 'projects', component: ProjectComponent},
+  {path: 'edit',component: EditTimereportComponent}
 ];
 
 

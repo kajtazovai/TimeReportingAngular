@@ -27,4 +27,13 @@ export class TimeService {
       'responseType':'text'
     });
   }
+  findTimereportById(id:number){
+    return this.http.get("http://localhost:8080/timereports/"+id,{
+      'responseType':'json'
+    })
+  }
+
+  deleteById(id: number) {
+    this.http.delete('http://localhost:8080/timereports/'+id).subscribe();
+  }
 }

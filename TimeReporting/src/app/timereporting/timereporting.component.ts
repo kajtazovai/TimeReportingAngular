@@ -7,6 +7,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angula
 import {NewtimereportComponent} from "../newtimereport/newtimereport.component";
 import {Observable, Subscription} from "rxjs";
 import {numbers} from "@material/dialog/constants";
+import {text} from "@angular/core/src/render3";
+import {browser} from "protractor";
 
 
 @Component({
@@ -20,7 +22,9 @@ export class TimereportingComponent implements OnInit {
   projectId:number;
   projects:Array<Project>;
   timereports : Array<Timereport>;
+  timereport : Timereport;
   dialogResult = "";
+  timereportId : number;
 
 
   constructor(private timereportService  : TimeService,private dialog :MatDialog) {
@@ -29,7 +33,6 @@ export class TimereportingComponent implements OnInit {
   ngOnInit() {
     this.projects = new Array<Project>();
     this.getTimereports();
-
   }
 
 
@@ -61,9 +64,31 @@ export class TimereportingComponent implements OnInit {
         var projectId = parseInt(parsed[i].project.id);
         var employeeName = String(parsed[i].employee.firstName);
         var projectName = String(parsed[i].project.name);
-        this.timereports.push(new Timereport(hours,employeeId,projectId));
+        var id = parseInt(parsed[i].id);
+        this.timereports.push(new Timereport(hours,employeeId,projectId,employeeName,projectName,id));
       }
     });
+  }
+
+  editTimereport(id: number){
+      var pom = this.timereportService.findTimereportById(id).subscribe(response=>{
+        var tmp = JSON.stringify(response);
+        var parsed = JSON.parse(tmp);
+        console.log(parsed);
+
+        //         // this.timereport.projectName = tet.projectName;
+        //         // this.timereport.employeeName = tmp.employeeName;
+        //         // this.timereport.employeeId = tmp.employeeId;
+        //         // this.timereport.projectId = tmp.projectId;
+        //         // return this.timereport;
+      });
+
+  }
+  deleteTimereport(id:number){
+    console.log(id);
+    this.timereportService.deleteById(id);
+    console.log("Deleted");
+    browser.refresh();
   }
 
 

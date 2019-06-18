@@ -14,7 +14,9 @@ import {ProjectService} from "./services/project.service";
 import { NewtimereportComponent } from './newtimereport/newtimereport.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import {MatIconModule} from "@angular/material";
+import {MatDatepickerModule, MatDialogModule, MatIconModule, MatNativeDateModule} from "@angular/material";
+import {EditTimereportComponent} from "./edit-timereport/edit-timereport.component";
+import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
 
 
 
@@ -25,7 +27,8 @@ import {MatIconModule} from "@angular/material";
     CreateUserComponent,
     TimereportingComponent,
     ProjectComponent,
-    NewtimereportComponent
+    NewtimereportComponent,
+    EditTimereportComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,11 @@ import {MatIconModule} from "@angular/material";
     DlDateTimePickerModule,
     BrowserAnimationsModule,
     MaterialModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+
 
 
   ],

@@ -6,7 +6,34 @@ export class Timereport {
     private _hours: number;
     private _employeeId :number;
     private _projectId:number;
+    private _projectName:string;
+    private _employeeName:string;
+    private _id : number;
 
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
+  }
+
+  get projectName(): string {
+    return this._projectName;
+  }
+
+  set projectName(value: string) {
+    this._projectName = value;
+  }
+
+  get employeeName(): string {
+    return this._employeeName;
+  }
+
+  set employeeName(value: string) {
+    this._employeeName = value;
+  }
 
   get employeeId(): number {
     return this._employeeId;
@@ -23,11 +50,13 @@ export class Timereport {
   set projectId(value: number) {
     this._projectId = value;
   }
-
-  constructor(hours: number,employeeId:number,projectId:number) {
+  constructor(hours: number,employeeId:number,projectId:number,employeeName:string,projectName:string,id:number) {
     this._hours = hours;
     this._employeeId = employeeId;
     this._projectId = projectId;
+    this._projectName = projectName;
+    this._employeeName=employeeName;
+    this._id  = id;
   
   }
 
