@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
   password : string;
   message : string;
   result:Object;
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -17,12 +18,17 @@ export class LoginComponent implements OnInit {
   }
   loginUser(){
     this.userService.checkLogin(this.username,this.password).subscribe(data=>{
-        if(data=="Correct login"){
-          this.message="Correct login";
+        if(data!== null){
+          console.log(data);
+          var pom = JSON.stringify(data);
+          this.message="";
+          window.sessionStorage.setItem("user",pom);
+          return data;
         }
         else{
-          this.message="Incorrect login";
+          this.message="Incorrect login or User don't exist";
         }
     });
   }
+
 }

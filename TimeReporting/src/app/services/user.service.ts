@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
-import { jsonpCallbackContext } from '@angular/common/http/src/module';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,15 +10,15 @@ export class UserService {
 
    }
    checkLogin(username:string,password:string):Observable<Object> {
-     return this.http.post("http://localhost:8080/loginUser",{
+     return this.http.post("http://localhost:8080/employee/login",{
        "username":username,
        "password":password
      },{
-        'responseType':'text'
+        'responseType':"json"
      });
    }
    createUser(firstname:string,lastname:string,embg:string,datejoining:Date,username:string,password:string,email:string,role:number,rolename:string,projectId:number):Observable<Object>{
-     return this.http.post('http://localhost:8080/employee/create',{
+     return this.http.post('http://localhost:8080/employee',{
           "firstName":firstname,
           "lastName":lastname,
           "embg":embg,

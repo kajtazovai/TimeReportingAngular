@@ -9,7 +9,7 @@ export class TimeService {
 
   constructor(private http:HttpClient) { }
   createTime(date:Date,hours:number,employeeId:number,projectId:number):Observable<Object> {
-    return this.http.post("http://localhost:8080/timereports/create",{
+    return this.http.post("http://localhost:8080/timereports",{
       "date":date,
       "hours":hours,
       "employee":{
