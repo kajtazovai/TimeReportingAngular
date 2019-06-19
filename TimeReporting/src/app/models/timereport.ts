@@ -2,13 +2,14 @@ import { Employee } from './employee';
 
 export class Timereport {
 
-    private _date: Date;
+    private _date: string;
     private _hours: number;
     private _employeeId :number;
     private _projectId:number;
     private _projectName:string;
     private _employeeName:string;
     private _id : number;
+
 
 
   get id(): number {
@@ -50,21 +51,22 @@ export class Timereport {
   set projectId(value: number) {
     this._projectId = value;
   }
-  constructor(hours: number,employeeId:number,projectId:number,employeeName:string,projectName:string,id:number) {
+  constructor(hours: number,employeeId:number,projectId:number,employeeName:string,projectName:string,id:number,date:string) {
     this._hours = hours;
     this._employeeId = employeeId;
     this._projectId = projectId;
     this._projectName = projectName;
     this._employeeName=employeeName;
     this._id  = id;
+    this._date = date;
   
   }
 
-  get date(): Date {
+  get date(): string {
     return this._date;
   }
 
-  set date(value: Date) {
+  set date(value: string) {
     this._date = value;
   }
 

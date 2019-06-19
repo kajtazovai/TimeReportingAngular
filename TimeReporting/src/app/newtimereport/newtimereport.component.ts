@@ -3,7 +3,6 @@ import {Project} from "../models/project";
 import {Timereport} from "../models/timereport";
 import {TimeService} from "../services/time.service";
 import { MatDialogRef ,MatDialogContent} from "@angular/material";
-import {browser} from "protractor";
 import {Employee} from "../models/employee";
 import {UserService} from "../services/user.service";
 import {ProjectService} from "../services/project.service";

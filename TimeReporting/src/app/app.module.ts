@@ -17,6 +17,7 @@ import { MaterialModule } from './material.module';
 import {MatDatepickerModule, MatDialogModule, MatIconModule, MatNativeDateModule} from "@angular/material";
 import {EditTimereportComponent} from "./edit-timereport/edit-timereport.component";
 import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
+import { DeletedialogtimereportComponent } from './deletedialogtimereport/deletedialogtimereport.component';
 
 
 
@@ -28,7 +29,8 @@ import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
     TimereportingComponent,
     ProjectComponent,
     NewtimereportComponent,
-    EditTimereportComponent
+    EditTimereportComponent,
+    DeletedialogtimereportComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent],
-  entryComponents:[NewtimereportComponent]
+  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent]
 })
 export class AppModule {
     
