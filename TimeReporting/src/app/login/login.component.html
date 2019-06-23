@@ -1,4 +1,11 @@
-
+<div class="navbar" *ngIf="isLogin">
+  <a href="#login" routerLink="/logout" routerLinkActive="active" class="pull-right">Logout</a>
+  <a href="#timereports" routerLink="/timereport" routerLinkActive="active">Timereport</a>
+</div>
+<div class="navbar" *ngIf="!isLogin">
+  <a href="#login" routerLink="/login" routerLinkActive="active" class="pull-right">Login</a>
+  <a href="#create" routerLink="/create" routerLinkActive="active" class="pull-right">Create User</a>
+</div>
   <form class="login-form" >
       <h1 class="login-title">
       Please log in!
@@ -14,6 +21,6 @@
       <input  placeholder="password" type="password" name="password" id="password" class="form-control" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
     </div>
     <br>
-    <button class="btn btn-success form-control" type="submit" (click)="loginUser()" routerLink="/timereport">Log in</button><br><br>
+    <button class="btn btn-success form-control" type="submit" (click)="loginUser()">Log in</button><br><br>
     <button class="btn btn-block btn-default form-control" routerLink="/create">Create user</button>
   </form>

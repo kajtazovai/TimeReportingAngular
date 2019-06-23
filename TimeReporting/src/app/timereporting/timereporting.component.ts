@@ -10,6 +10,7 @@ import {numbers} from "@material/dialog/constants";
 import {text} from "@angular/core/src/render3";
 import {DeletedialogtimereportComponent} from "../deletedialogtimereport/deletedialogtimereport.component";
 import {isComponentInstance} from "@angular/core/src/render3/context_discovery";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -26,14 +27,21 @@ export class TimereportingComponent implements OnInit {
   timereport : Timereport;
   dialogResult = "";
   timereportId : number;
+  isLogin : boolean;
 
 
-  constructor(private timereportService  : TimeService,private dialog :MatDialog) {
+  constructor(private timereportService  : TimeService,private dialog :MatDialog,private router :Router) {
     this.timereports = new Array<Timereport>();
   }
   ngOnInit() {
-    this.projects = new Array<Project>();
-    this.getTimereports();
+    var pom = window.sessionStorage.getItem('user');
+    if(pom!=null) {
+      this.projects = new Array<Project>();
+      this.getTimereports();
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 
 
@@ -54,6 +62,7 @@ export class TimereportingComponent implements OnInit {
   }
   getTimereports(){
     this.timereports = new Array<Timereport>();
+    var session=window.sessionStorage.getItem('user');
     this.timereportService.getTimereports().subscribe(text=>{
       var pom =  text as Timereport[];
       var parsed = JSON.parse(pom.toString());
@@ -68,7 +77,10 @@ export class TimereportingComponent implements OnInit {
         var id = parseInt(parsed[i].id);
         var date = parsed[i].date;
         var converted = this.convertDate(date);
-        this.timereports.push(new Timereport(hours,employeeId,projectId,employeeName,projectName,id,converted));
+        var parsedSession = JSON.parse(session);
+        if(employeeId===parsedSession.id) {
+          this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, converted));
+        }
       }
     });
   }
@@ -106,27 +118,55 @@ export class TimereportingComponent implements OnInit {
     console.log(id);
   }
   searchWithDate(){
-    this.timereports = new Array<Timereport>();
-    this.timereportService.getTimereports().subscribe(text=>{
-      var pom =  text as Timereport[];
-      var parsed = JSON.parse(pom.toString());
-      var list = new Array<Timereport>();
-      list = parsed;
-      for(var i=0;i<list.length;i++){
-        var hours = parseInt(parsed[i].hours);
-        var employeeId = parseInt(parsed[i].employee.id);
-        var projectId = parseInt(parsed[i].project.id);
-        var employeeName = String(parsed[i].employee.firstName);
-        var projectName = String(parsed[i].project.name);
-        var id = parseInt(parsed[i].id);
-        var date = parsed[i].date;
-        var dateConvert = this.convertDate(date);
-        var converted = this.convertDate(this.date);
-        if(dateConvert===converted) {
-           this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, dateConvert));
+    var session=window.sessionStorage.getItem('user');
+    if(this.date!=null) {
+      this.timereports = new Array<Timereport>();
+      this.timereportService.getTimereports().subscribe(text => {
+        var pom = text as Timereport[];
+        var parsed = JSON.parse(pom.toString());
+        var list = new Array<Timereport>();
+        list = parsed;
+        for (var i = 0; i < list.length; i++) {
+          var hours = parseInt(parsed[i].hours);
+          var employeeId = parseInt(parsed[i].employee.id);
+          var projectId = parseInt(parsed[i].project.id);
+          var employeeName = String(parsed[i].employee.firstName);
+          var projectName = String(parsed[i].project.name);
+          var id = parseInt(parsed[i].id);
+          var date = parsed[i].date;
+          var dateConvert = this.convertDate(date);
+          var converted = this.convertDate(this.date);
+          if (dateConvert === converted) {
+            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, dateConvert));
+          }
         }
-      }
-    });
+      });
+    }
+    else{
+      this.timereports = new Array<Timereport>();
+      this.timereportService.getTimereports().subscribe(text => {
+        var pom = text as Timereport[];
+        var parsed = JSON.parse(pom.toString());
+        var list = new Array<Timereport>();
+        list = parsed;
+        for (var i = 0; i < list.length; i++) {
+          var hours = parseInt(parsed[i].hours);
+          var employeeId = parseInt(parsed[i].employee.id);
+          var projectId = parseInt(parsed[i].project.id);
+          var employeeName = String(parsed[i].employee.firstName);
+          var projectName = String(parsed[i].project.name);
+          var id = parseInt(parsed[i].id);
+          var date = parsed[i].date;
+          var dateConvert = this.convertDate(date);
+          var parsedSession = JSON.parse(session);
+          if(employeeId===parsedSession.id) {
+            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, dateConvert));
+          }
+
+        }
+      });
+
+    }
   }
   convertDate(date){
     var pom = new Date(date);

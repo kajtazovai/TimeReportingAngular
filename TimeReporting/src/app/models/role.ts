@@ -1,5 +1,14 @@
 export class Role {
     private _name:string;
+    private _id :number;
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
+  }
 
   get name(): string {
     return this._name;
@@ -9,7 +18,7 @@ export class Role {
     this._name = value;
   }
 
-  constructor(name: string) {
-    this._name = name;
+  constructor(id:number) {
+    this._id = id;
   }
 }

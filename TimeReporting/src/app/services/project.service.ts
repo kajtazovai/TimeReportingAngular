@@ -15,9 +15,7 @@ export class ProjectService {
       "name":name,
       "budget":budget
     }
-    console.log(name + budget);
-
-    return this.http.post("http://localhost:8080/projects/create",body);
+    return this.http.post("http://localhost:8080/projects",body);
   }
   getProjects(){
     return this.http.get("http://localhost:8080/projects");
