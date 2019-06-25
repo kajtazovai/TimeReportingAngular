@@ -20,4 +20,7 @@ export class ProjectService {
   getProjects(){
     return this.http.get("http://localhost:8080/projects");
   }
+  getProjectById(id:number){
+    return this.http.get("http://localhost:8080/projects/"+id);
+  }
 }

@@ -1,6 +1,11 @@
 
 <div class="timereportsDays mat-dialog-container">
-  <div id="addRow"><input class="form-control" type="date" [(ngModel)]="date"><br>
+  <div id="addRow">
+    <mat-form-field class="calendarreport">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
     <select class="form-control" [(ngModel)]="employeeId" >
         <option *ngFor="let employee of employees" [value]="employee.id">{{employee.firstName}}</option>

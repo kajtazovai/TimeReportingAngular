@@ -11,6 +11,8 @@ import {text} from "@angular/core/src/render3";
 import {DeletedialogtimereportComponent} from "../deletedialogtimereport/deletedialogtimereport.component";
 import {isComponentInstance} from "@angular/core/src/render3/context_discovery";
 import {Router} from "@angular/router";
+import {EdittimereportComponent} from "../edittimereport/edittimereport.component";
+
 
 
 @Component({
@@ -76,30 +78,13 @@ export class TimereportingComponent implements OnInit {
         var projectName = String(parsed[i].project.name);
         var id = parseInt(parsed[i].id);
         var date = parsed[i].date;
-        var converted = this.convertDate(date);
         var parsedSession = JSON.parse(session);
         if(employeeId===parsedSession.id) {
-          this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, converted));
+          this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, date));
         }
       }
     });
   }
-
-  editTimereport(id: number){
-      var pom = this.timereportService.findTimereportById(id).subscribe(response=>{
-        var tmp = JSON.stringify(response);
-        var parsed = JSON.parse(tmp);
-        console.log(parsed);
-
-        //         // this.timereport.projectName = tet.projectName;
-        //         // this.timereport.employeeName = tmp.employeeName;
-        //         // this.timereport.employeeId = tmp.employeeId;
-        //         // this.timereport.projectId = tmp.projectId;
-        //         // return this.timereport;
-      });
-
-  }
-
   deleteTimereport(id:number){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose=true;
@@ -175,6 +160,22 @@ export class TimereportingComponent implements OnInit {
     var year = pom.getFullYear();
     var result = day+'/'+month+'/'+year;
     return result;
+  }
+  editTimereport(timereport:Timereport){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose=true;
+    dialogConfig.width="400px";
+    dialogConfig.autoFocus=true;
+    let dialogRef = this.dialog.open(EdittimereportComponent,dialogConfig);
+    dialogRef.componentInstance.data=timereport;
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog closed: ${result}`);
+      if(result=="Edit"){
+        this.getTimereports();
+      }
+      this.dialogResult = result;
+
+    })
   }
 
 

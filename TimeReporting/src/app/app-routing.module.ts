@@ -4,7 +4,8 @@ import {LoginComponent} from './login/login.component';
 import {CreateUserComponent} from './create-user/create-user.component';
 import {TimereportingComponent} from './timereporting/timereporting.component';
 import {ProjectComponent} from "./project/project.component";
-import {EditTimereportComponent} from "./edit-timereport/edit-timereport.component";
+import {EdittimereportComponent} from "./edittimereport/edittimereport.component";
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -12,7 +13,6 @@ const routes: Routes = [
   {path: 'create', component: CreateUserComponent},
   {path: 'timereport', component: TimereportingComponent},
   {path: 'projects', component: ProjectComponent},
-  {path: 'edit',component: EditTimereportComponent}
 ];
 
 

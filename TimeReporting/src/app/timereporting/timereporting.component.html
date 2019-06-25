@@ -22,8 +22,8 @@
       <td>{{timereport.hours}}</td>
       <td>{{timereport.employeeName}}</td>
       <td> {{timereport.projectName}}</td>
-      <td> {{timereport.date}}</td>
-      <td><button class="btn btn-default" routerLink="/edit" id="{{timereport.id}}" (click)="editTimereport(timereport.id)">Edit</button> <button class="btn btn-danger" (click)="deleteTimereport(timereport.id)">Delete</button></td>
+      <td> {{timereport.date | date}}</td>
+      <td><button class="btn btn-default" id="{{timereport.id}}" (click)="editTimereport(timereport)">Edit</button> <button class="btn btn-danger" (click)="deleteTimereport(timereport.id)">Delete</button></td>
     </tr>
     </tbody>
   </table>

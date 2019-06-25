@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Timereport} from "../models/timereport";
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,21 @@ export class TimeService {
 
   deleteById(id: number) {
     this.http.delete('http://localhost:8080/timereports/'+id).subscribe();
+  }
+  editTimereport(timereport:Timereport){
+    console.log(timereport);
+    this.http.put('http://localhost:8080/timereports',{
+      "id":timereport.id,
+      "date":timereport.date,
+      "hours":timereport.hours,
+      "employee":{
+        "id":timereport.employeeId
+      },
+      "project":{
+        "id":timereport.projectId
+      },
+    },{
+      'responseType':'text'
+    }).subscribe();
   }
 }

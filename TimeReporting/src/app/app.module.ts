@@ -15,10 +15,11 @@ import { NewtimereportComponent } from './newtimereport/newtimereport.component'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import {MatDatepickerModule, MatDialogModule, MatIconModule, MatNativeDateModule} from "@angular/material";
-import {EditTimereportComponent} from "./edit-timereport/edit-timereport.component";
 import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
 import { DeletedialogtimereportComponent } from './deletedialogtimereport/deletedialogtimereport.component';
 import { HeaderComponent } from './header/header.component';
+import { EdituserComponent } from './edituser/edituser.component';
+import { EdittimereportComponent } from './edittimereport/edittimereport.component';
 
 
 
@@ -30,9 +31,11 @@ import { HeaderComponent } from './header/header.component';
     TimereportingComponent,
     ProjectComponent,
     NewtimereportComponent,
-    EditTimereportComponent,
     DeletedialogtimereportComponent,
     HeaderComponent,
+    EdituserComponent,
+    EdittimereportComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent],
-  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent]
+  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent]
 })
 export class AppModule {
     
