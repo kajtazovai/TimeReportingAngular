@@ -1,0 +1,20 @@
+
+<div class="timereportsDays mat-dialog-container form-control">
+  <div id="addRow">
+    <mat-form-field class="calendarreport">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours" (ngModelChange)="changeHours($event)"><br>
+    <input class="form-control" type="text" [value]="selectedEmployee.firstname" disabled><br>
+    <select class="form-control" [(ngModel)]="selectedProject" (ngModelChange)="changeProject($event)" [value]="selectedProject.name">
+      <option *ngFor="let project of projects" [value]="project.id">{{project.name}}</option>
+    </select><br>
+    <div class="row">
+      <div class="col-md-6"><button class="form-control btn btn-success" (click)="editTimereport()">Edit</button></div><br>
+      <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
+
+    </div>
+  </div>
+</div>
