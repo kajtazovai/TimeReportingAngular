@@ -19,11 +19,12 @@ export class EdittimereportComponent implements OnInit {
   employeeId:number;
   projectId:number;
   projectName:string;
-  projects:Object;
+  projects:Array<Project>;
   employees:Array<Employee>;
   selectedEmployee:Employee;
   selectedProject: Project;
   timereport:Timereport;
+
 
 
   constructor(private timereportService  : TimeService,public dialogRef: MatDialogRef<NewtimereportComponent>,
@@ -34,7 +35,8 @@ export class EdittimereportComponent implements OnInit {
 
 
   ngOnInit() {
-    this.selectedProject = this.data.projectId;
+    console.log(this.data);
+    this.selectedProject = this.data.projectName;
     this.hours = this.data.hours;
     var dateTimereport = new Date(this.data.date);
     this.employeeId = this.data.employeeId;
@@ -45,7 +47,7 @@ export class EdittimereportComponent implements OnInit {
     var parsed = JSON.parse(currentUser);
     this.selectedEmployee = new Employee(parsed.id,parsed.firstName,parsed.lastName,parsed.username,parsed.password,parsed.email,parsed.dateJoining);
     this.projects = new Array<Project>();
-    this.projectService.getProjects().subscribe(text=>{
+    this.projectService.getProjects().subscribe((text:Array<Project>)=>{
       this.projects = text;
     })
   }
@@ -54,19 +56,11 @@ export class EdittimereportComponent implements OnInit {
   }
 
   editTimereport() {
+
     this.timereport = new Timereport(this.hours,this.employeeId,this.selectedProject.id,this.selectedEmployee.firstname,this.selectedProject.name,this.data.id,this.date);
     this.timereportService.editTimereport(this.timereport);
     this.dialogRef.close("Edit");
     alert("Successfully edited");
-  }
-
-  changeProject(event) {
-    var pom = this.projectService.getProjectById(parseInt(event)).subscribe(text=>{
-      var pom = JSON.stringify(text);
-      var parsed = JSON.parse(pom);
-      console.log(parsed)
-      return this.selectedProject = new Project(parsed.name,parsed.id);
-    });
   }
 
   changeDate(event) {
@@ -77,5 +71,8 @@ export class EdittimereportComponent implements OnInit {
 
   changeHours(event) {
     this.hours = event;
+  }
+  getProjectById($id){
+    return this.projects.filter(x=> x.id===$id);
   }
 }

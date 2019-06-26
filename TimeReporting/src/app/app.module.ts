@@ -14,7 +14,13 @@ import {ProjectService} from "./services/project.service";
 import { NewtimereportComponent } from './newtimereport/newtimereport.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import {MatDatepickerModule, MatDialogModule, MatIconModule, MatNativeDateModule} from "@angular/material";
+import {
+  MatDatepickerModule,
+  MatDialogModule,
+  MatIconModule,
+  MatNativeDateModule,
+  MatSelectModule
+} from "@angular/material";
 import {MatDatepicker} from "@angular/material/typings/esm5/datepicker";
 import { DeletedialogtimereportComponent } from './deletedialogtimereport/deletedialogtimereport.component';
 import { HeaderComponent } from './header/header.component';
@@ -50,7 +56,7 @@ import { EdittimereportComponent } from './edittimereport/edittimereport.compone
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-
+    MatSelectModule,
 
 
   ],

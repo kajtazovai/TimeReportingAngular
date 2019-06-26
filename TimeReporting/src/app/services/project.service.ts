@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {map, mapTo} from "rxjs/operators";
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class ProjectService {
     return this.http.post("http://localhost:8080/projects",body);
   }
   getProjects(){
-    return this.http.get("http://localhost:8080/projects");
+    return this.http.get("http://localhost:8080/projects")
   }
   getProjectById(id:number){
     return this.http.get("http://localhost:8080/projects/"+id);

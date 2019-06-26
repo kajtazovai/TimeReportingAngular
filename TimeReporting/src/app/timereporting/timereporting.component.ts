@@ -122,7 +122,7 @@ export class TimereportingComponent implements OnInit {
           var dateConvert = this.convertDate(date);
           var converted = this.convertDate(this.date);
           if (dateConvert === converted) {
-            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, dateConvert));
+            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, date));
           }
         }
       });
@@ -145,7 +145,7 @@ export class TimereportingComponent implements OnInit {
           var dateConvert = this.convertDate(date);
           var parsedSession = JSON.parse(session);
           if(employeeId===parsedSession.id) {
-            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, dateConvert));
+            this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, date));
           }
 
         }
