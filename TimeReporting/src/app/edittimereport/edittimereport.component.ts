@@ -24,6 +24,7 @@ export class EdittimereportComponent implements OnInit {
   selectedEmployee:Employee;
   selectedProject: Project;
   timereport:Timereport;
+  selected: any;
 
 
 
@@ -36,8 +37,10 @@ export class EdittimereportComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data);
-    this.selectedProject = this.data.projectName;
+    this.selected = this.data.projectName;
+    this.selectedProject = new Project(this.data.projectName,this.data.projectId,this.data.budget);
     this.hours = this.data.hours;
+    console.log(this.selected);
     var dateTimereport = new Date(this.data.date);
     this.employeeId = this.data.employeeId;
     this.projectId = this.data.projectId;
@@ -74,5 +77,9 @@ export class EdittimereportComponent implements OnInit {
   }
   getProjectById($id){
     return this.projects.filter(x=> x.id===$id);
+  }
+
+  changeProject($event) {
+    this.selectedProject = $event;
   }
 }

@@ -6,3 +6,10 @@
   border: 3px  dotted black;
   width:350px;
 }
+.projectTable{
+  width: 550px;
+  margin: 0 auto;
+}
+.editButton{
+  margin-right: 20px;
+}

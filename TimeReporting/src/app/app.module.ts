@@ -26,6 +26,8 @@ import { DeletedialogtimereportComponent } from './deletedialogtimereport/delete
 import { HeaderComponent } from './header/header.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { EdittimereportComponent } from './edittimereport/edittimereport.component';
+import { DeleteprojectComponent } from './deleteproject/deleteproject.component';
+import { EditprojectComponent } from './editproject/editproject.component';
 
 
 
@@ -41,6 +43,8 @@ import { EdittimereportComponent } from './edittimereport/edittimereport.compone
     HeaderComponent,
     EdituserComponent,
     EdittimereportComponent,
+    DeleteprojectComponent,
+    EditprojectComponent,
 
   ],
   imports: [
@@ -62,7 +66,7 @@ import { EdittimereportComponent } from './edittimereport/edittimereport.compone
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent],
-  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent]
+  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent,DeleteprojectComponent,EditprojectComponent]
 })
 export class AppModule {
     

@@ -7,12 +7,19 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
-    <select class="form-control" [(ngModel)]="employeeId" >
-        <option *ngFor="let employee of employees" [value]="employee.id">{{employee.firstName}}</option>
-    </select>
-    <select class="form-control" [(ngModel)]="projectId">
-      <option *ngFor="let project of projects" [value]="project.id">{{project.name}}</option>
-    </select>
+    <input *ngIf="role.id!==1" class="form-control" [(ngModel)]="employeeId" disabled>
+    <mat-form-field *ngIf="role.id===1">
+      <mat-label>Select employee</mat-label>
+      <mat-select  [(ngModel)]="selectedEmployee" (ngModelChange)="changeEmployee($event)" >
+        <mat-option *ngFor="let employee of employees" [value]="employee" >{{employee.firstname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select project</mat-label>
+      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProjectId($event)">
+        <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <div class="row">
       <div class="col-md-6"><button class="form-control btn btn-success" (click)="createTime()">Add</button></div>
       <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>

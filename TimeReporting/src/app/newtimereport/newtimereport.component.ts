@@ -6,6 +6,7 @@ import { MatDialogRef ,MatDialogContent} from "@angular/material";
 import {Employee} from "../models/employee";
 import {UserService} from "../services/user.service";
 import {ProjectService} from "../services/project.service";
+import {Role} from "../models/role";
 
 
 
@@ -20,23 +21,27 @@ export class NewtimereportComponent implements OnInit {
   date:Date;
   employeeId:number;
   projectId:number;
-  projects:Object;
+  projects:Array<Project>;
   employees:Array<Employee>;
-  selectedEmployee:number;
-  selectedProject: number;
+  selectedEmployee:Employee;
+  selectedProject: Project;
+  role:Role;
 
   constructor(private timereportService  : TimeService,public dialogRef: MatDialogRef<NewtimereportComponent>,private employeeService:UserService,private  projectService:ProjectService) { }
   ngOnInit() {
+    var session  = window.sessionStorage.getItem('user');
+    var parsed = JSON.parse(session);
+    this.role = new Role(parsed.role.id);
+    if(this.role.id!==1) {
+      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining);
+    }
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();
-    this.employeeService.getUsers().subscribe(text=>{
-      var parsed = JSON.parse(text);
-      this.employees = parsed;
-      console.log(this.employees);
-    });
-    this.projectService.getProjects().subscribe(text=>{
+    this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
+      this.employees = text;
+    })
+    this.projectService.getProjects().subscribe((text:Array<Project>)=>{
       this.projects = text;
-      console.log(this.projects);
     })
   }
   createTime(){
@@ -53,5 +58,14 @@ export class NewtimereportComponent implements OnInit {
 
   onCloseCancel() {
       this.dialogRef.close('Cancel');
+  }
+
+  changeProjectId($event) {
+    this.projectId = $event.id;
+  }
+
+  changeEmployee($event) {
+    console.log($event)
+    this.employeeId= $event.id;
   }
 }

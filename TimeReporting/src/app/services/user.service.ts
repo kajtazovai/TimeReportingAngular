@@ -39,8 +39,6 @@ export class UserService {
 
    }
    getUsers(){
-     return this.http.get("http://localhost:8080/employee",{
-       'responseType':'text'
-     });
+     return this.http.get("http://localhost:8080/employee");
    }
 }

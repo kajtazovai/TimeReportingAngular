@@ -27,8 +27,11 @@ export class Project{
     this._budget = value;
   }
 
-  constructor(name: string,id:number) {
+  constructor(name: string,id:number,budget:number) {
     this._name = name;
     this._id = id;
+    this._budget = budget;
   }
+
+
 }
