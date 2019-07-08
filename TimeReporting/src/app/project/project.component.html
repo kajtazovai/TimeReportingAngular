@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="projectAdd">
   <input class="form-control" type="text"  [(ngModel)]="name" placeholder="Name project" name="name"><br>
-  <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget project" name="budget"><br>
+  <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget project" name="budget" [min]="1"><br>
   <button class="form-control btn btn-success" (click)="createProject()">Create project</button>
 </div><br>
 <div>

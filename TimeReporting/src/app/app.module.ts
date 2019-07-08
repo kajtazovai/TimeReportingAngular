@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import  { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -28,6 +28,9 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { EdittimereportComponent } from './edittimereport/edittimereport.component';
 import { DeleteprojectComponent } from './deleteproject/deleteproject.component';
 import { EditprojectComponent } from './editproject/editproject.component';
+import { EmployeesComponent } from './employees/employees.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {ChartsModule} from "ng2-charts";
 
 
 
@@ -45,6 +48,8 @@ import { EditprojectComponent } from './editproject/editproject.component';
     EdittimereportComponent,
     DeleteprojectComponent,
     EditprojectComponent,
+    EmployeesComponent,
+    DashboardComponent,
 
   ],
   imports: [
@@ -61,7 +66,8 @@ import { EditprojectComponent } from './editproject/editproject.component';
     MatNativeDateModule,
     MatDialogModule,
     MatSelectModule,
-
+    ReactiveFormsModule,
+    ChartsModule
 
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],

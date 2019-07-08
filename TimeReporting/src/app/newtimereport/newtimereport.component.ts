@@ -7,6 +7,7 @@ import {Employee} from "../models/employee";
 import {UserService} from "../services/user.service";
 import {ProjectService} from "../services/project.service";
 import {Role} from "../models/role";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 
@@ -16,7 +17,11 @@ import {Role} from "../models/role";
   styleUrls: ['./newtimereport.component.css']
 })
 export class NewtimereportComponent implements OnInit {
+  newtimereport = new FormGroup({
+    hours: new FormControl([
 
+    ],[Validators.required])
+  })
   hours:number;
   date:Date;
   employeeId:number;
@@ -26,7 +31,7 @@ export class NewtimereportComponent implements OnInit {
   selectedEmployee:Employee;
   selectedProject: Project;
   role:Role;
-
+  data;
   constructor(private timereportService  : TimeService,public dialogRef: MatDialogRef<NewtimereportComponent>,private employeeService:UserService,private  projectService:ProjectService) { }
   ngOnInit() {
     var session  = window.sessionStorage.getItem('user');
@@ -38,6 +43,7 @@ export class NewtimereportComponent implements OnInit {
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();
     this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
+      console.log(text);
       this.employees = text;
     })
     this.projectService.getProjects().subscribe((text:Array<Project>)=>{
@@ -45,14 +51,19 @@ export class NewtimereportComponent implements OnInit {
     })
   }
   createTime(){
-    this.timereportService.createTime(this.date,this.hours,this.employeeId,this.projectId).subscribe(text =>{
-      if(this.date!=null && this.hours>0){
+    if(this.hours!=null && this.selectedEmployee!=null && this.selectedProject!=null){
+      this.timereportService.createTime(this.date, this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
+        if (this.date != null && this.hours > 0) {
 
-        this.dialogRef.close("Create");
-        alert("Succesfull added timereport");
+          this.dialogRef.close("Create");
+          alert("Succesfull added timereport");
 
-       }
-    });
+        }
+      });
+    }
+    else {
+      alert("All field are mandatory");
+    }
   }
 
 
@@ -61,11 +72,12 @@ export class NewtimereportComponent implements OnInit {
   }
 
   changeProjectId($event) {
-    this.projectId = $event.id;
+    console.log($event);
+    this.selectedProject = $event;
   }
 
   changeEmployee($event) {
     console.log($event)
-    this.employeeId= $event.id;
+    this.selectedEmployee= $event;
   }
 }

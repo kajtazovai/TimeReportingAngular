@@ -50,19 +50,19 @@ export class Employee{
     this._id = value;
   }
 
-  get firstname(): string {
+  get firstName(): string {
     return this._firstName;
   }
 
-  set firstname(value: string) {
+  set firstName(value: string) {
     this._firstName = value;
   }
 
-  get lastname(): string {
+  get lastName(): string {
     return this._lastName;
   }
 
-  set lastname(value: string) {
+  set lastName(value: string) {
     this._lastName = value;
   }
 

@@ -38,15 +38,19 @@ export class ProjectComponent implements OnInit {
     }
   }
   createProject(){
-    this.projectService.createProject(this.name,this.budget).subscribe(text=>{
-      if(this.name!="" && this.budget!=null){
-        alert("Successfull create project");
-        this.getProjects();
-      }
-      else{
-        alert("Project not created");
-      }
-    });
+    if(this.name!="" && this.budget!=null) {
+      this.projectService.createProject(this.name, this.budget).subscribe(text => {
+        if (this.name != "" && this.budget != null) {
+          alert("Successfull create project");
+          this.getProjects();
+          this.name="";
+          this.budget=null;
+        }
+      });
+    }
+    else {
+      alert("Project not created");
+    }
   }
 
   editProject(project: Project) {

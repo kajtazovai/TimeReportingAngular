@@ -5,6 +5,8 @@ import {CreateUserComponent} from './create-user/create-user.component';
 import {TimereportingComponent} from './timereporting/timereporting.component';
 import {ProjectComponent} from "./project/project.component";
 import {EdittimereportComponent} from "./edittimereport/edittimereport.component";
+import {EmployeesComponent} from "./employees/employees.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'create', component: CreateUserComponent},
   {path: 'timereport', component: TimereportingComponent},
   {path: 'projects', component: ProjectComponent},
+  {path: 'employees',component:EmployeesComponent},
+  {path: 'dashboard',component: DashboardComponent}
 ];
 
 

@@ -60,7 +60,7 @@ export class EdittimereportComponent implements OnInit {
 
   editTimereport() {
 
-    this.timereport = new Timereport(this.hours,this.employeeId,this.selectedProject.id,this.selectedEmployee.firstname,this.selectedProject.name,this.data.id,this.date);
+    this.timereport = new Timereport(this.hours,this.employeeId,this.selectedProject.id,this.selectedEmployee.firstName,this.selectedProject.name,this.data.id,this.date);
     this.timereportService.editTimereport(this.timereport);
     this.dialogRef.close("Edit");
     alert("Successfully edited");

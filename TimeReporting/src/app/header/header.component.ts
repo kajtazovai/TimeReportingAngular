@@ -19,12 +19,10 @@ export class HeaderComponent implements OnInit {
     if(pom!=null){
       var parsed = JSON.parse(pom);
       this.role = new Role(parsed.role.id);
-      console.log(this.role);
       this.isLogin= true;
     }
     else{
       this.isLogin = false;
-      console.log(this.isLogin);
     }
   }
   logoutUser(){

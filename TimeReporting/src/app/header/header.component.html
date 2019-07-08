@@ -1,11 +1,14 @@
 <div class="navbar" *ngIf="isLogin">
   <a href="#login" routerLink="/logout" routerLinkActive="active" class="pull-right" (click)="logoutUser()">Logout</a>
+  <a href="#timereports" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   <a href="#timereports" routerLink="/timereport" routerLinkActive="active">Timereport</a>
   <a href="#projects" routerLink="/projects" routerLinkActive="active" *ngIf="role.id===1">Projects</a>
+  <a href="#projects" routerLink="/employees" routerLinkActive="active" *ngIf="role.id===1">Employees</a>
+  <a href="#create" routerLink="/create" routerLinkActive="active" class="pull-right" *ngIf="role.id===1">Create User</a>
 </div>
 <div class="navbar" *ngIf="!isLogin">
   <a href="#login" routerLink="/login" routerLinkActive="active" class="pull-right">Login</a>
-  <a href="#create" routerLink="/create" routerLinkActive="active" class="pull-right">Create User</a>
+  <a href="#timereports" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   <a href="#timereports" routerLink="/timereport" routerLinkActive="active" *ngIf="role.id===1 || role.id===0">Timereport</a>
   <a href="#projects" routerLink="/projects" routerLinkActive="active" *ngIf="role.id===1">Projects</a>
 </div>

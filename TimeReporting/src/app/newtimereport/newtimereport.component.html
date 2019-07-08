@@ -1,22 +1,22 @@
 
 <div class="timereportsDays mat-dialog-container">
-  <div id="addRow">
-    <mat-form-field class="calendarreport">
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+  <form id="addRow" class="form-group">
+    <mat-form-field class="calendarreport" >
+      <input  matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" name="date" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours"><br>
-    <input *ngIf="role.id!==1" class="form-control" [(ngModel)]="employeeId" disabled>
-    <mat-form-field *ngIf="role.id===1">
+    <input class="form-control mat-form-field-required-marker" type="number" [(ngModel)]="hours" placeholder="Hours" name="hours" [min]="1" ><br>
+    <input *ngIf="role.id!==1" class="form-control" [(ngModel)]="selectedEmployee.firstName" disabled name="employee">
+    <mat-form-field *ngIf="role.id===1" >
       <mat-label>Select employee</mat-label>
-      <mat-select  [(ngModel)]="selectedEmployee" (ngModelChange)="changeEmployee($event)" >
-        <mat-option *ngFor="let employee of employees" [value]="employee" >{{employee.firstname}}</mat-option>
+      <mat-select  [(ngModel)]="selectedEmployee" (ngModelChange)="changeEmployee($event)" name="employee">
+        <mat-option *ngFor="let employee of employees" [value]="employee" >{{employee.firstName + " "+ employee.lastName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select project</mat-label>
-      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProjectId($event)">
+      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProjectId($event)" name="project">
         <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -25,5 +25,5 @@
       <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
 
     </div>
-  </div>
+  </form>
 </div>
