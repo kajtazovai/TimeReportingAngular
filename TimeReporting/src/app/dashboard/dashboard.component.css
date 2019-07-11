@@ -1,3 +1,15 @@
-#canvas{
+.mychart{
+  width: 300px;
+  height: 300px;
   margin-top: 100px;
 }
+.salaryChart{
+  width: 300px;
+  height: 300px;
+  margin-top: 110px;
+}
+.statistics{
+  float: left;
+  clear: both;
+}
+

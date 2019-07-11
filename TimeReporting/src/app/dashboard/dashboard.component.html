@@ -1,2 +1,14 @@
 <app-header></app-header>
-<div style="width: 400px; height: 400px"><canvas id="canvas">{{ chart }}</canvas></div>
+<div class="mychart pull-left">
+  <button (click)="createChart()">Show chart</button>
+ <canvas id="salary" width="150px" height="150px">{{chart}}</canvas>
+</div>
+<div class="salaryChart pull-left">
+  <br>
+  <canvas id="hours" width="150px" height="150px">{{chart}}</canvas>
+</div>
+<br>
+<div class="statistics">
+  <h4><label>Total Salary: {{salary}}</label> </h4>
+  <h4><label>Total Hours: {{hours}}</label> </h4>
+</div>

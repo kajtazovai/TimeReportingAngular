@@ -25,6 +25,7 @@
     "@angular/router": "^7.2.15",
     "@material/animation": "^1.0.0",
     "@material/dialog": "^2.3.0",
+    "@syncfusion/ej2-ng-charts": "^16.2.50",
     "@types/chart.js": "^2.7.55",
     "@types/moment": "^2.13.0",
     "angular-bootstrap-datetimepicker": "^3.0.0",

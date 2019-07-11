@@ -30,7 +30,7 @@ import { DeleteprojectComponent } from './deleteproject/deleteproject.component'
 import { EditprojectComponent } from './editproject/editproject.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {ChartsModule} from "ng2-charts";
+
 
 
 
@@ -67,7 +67,6 @@ import {ChartsModule} from "ng2-charts";
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
-    ChartsModule
 
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
