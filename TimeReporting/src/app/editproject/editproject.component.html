@@ -1,7 +1,9 @@
 
 <div class=" mat-dialog-container form-control">
   <div id="addRow">
+      <label>Project Name</label>
       <input class="form-control" type="text" [(ngModel)]="name" placeholder="Name" (ngModelChange)="changeName($event)"><br>
+      <label>Budget</label>
       <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget" (ngModelChange)="changeBudget($event)"><br>
     <div class="row">
       <div class="col-md-6"><button class="form-control btn btn-success" (click)="editProject()">Save</button></div>

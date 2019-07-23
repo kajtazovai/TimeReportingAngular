@@ -50,6 +50,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EditprojectComponent,
     EmployeesComponent,
     DashboardComponent,
+    EdituserComponent,
 
   ],
   imports: [
@@ -71,7 +72,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent],
-  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent,DeleteprojectComponent,EditprojectComponent]
+  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent,DeleteprojectComponent,EditprojectComponent,EdituserComponent]
 })
 export class AppModule {
     

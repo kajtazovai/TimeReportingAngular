@@ -1,3 +1,40 @@
-<p>
-  edituser works!
-</p>
+<div class=" mat-dialog-container form-control">
+  <div class="row">
+    <div class="col-md-6">
+      <label>First Name</label>
+      <input class="form-control" type="text" [(ngModel)]="firstName" placeholder="First Name"
+        (ngModelChange)="changeFirstName($event)"><br>
+      <label>Last Name</label>
+      <input class="form-control" type="text" [(ngModel)]="lastName" placeholder="Last Name"
+        (ngModelChange)="changeLastName($event)"><br>
+      <label>EMBG</label>
+      <input class="form-control" type="text" [(ngModel)]="embg" placeholder="EMBG"
+        (ngModelChange)="changeEMBG($event)"><br>
+      <mat-form-field class="calendarreport" style="width: 100%">
+        <label>Date of Joining</label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dateJoining" (ngModelChange)="changeDateJoining($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <label>Role</label>
+      <input class="form-control" type="number" [(ngModel)]="role" placeholder="Role"
+        (ngModelChange)="changeRole($event)"><br>
+    </div>
+    <div class="col-md-6">
+      <label>Email</label>
+      <input class="form-control" type="text" [(ngModel)]="email" placeholder="Email"
+        (ngModelChange)="changeEmail($event)"><br>
+      <label>Username</label>
+      <input class="form-control" type="text" [(ngModel)]="username" placeholder="Username"
+        (ngModelChange)="changeUsername($event)"><br>
+        <label>Password</label>
+      <input class="form-control" type="password" [(ngModel)]="password" placeholder="Password"
+        (ngModelChange)="changePassword($event)"><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"><button class="form-control btn btn-success" (click)="editEmployee()">Save</button></div>
+    <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
+
+  </div>
+</div>

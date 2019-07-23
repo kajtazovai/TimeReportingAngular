@@ -4,6 +4,8 @@ import {UserService} from "../services/user.service";
 import {Project} from "../models/project";
 import {Router} from "@angular/router";
 import {Role} from "../models/role";
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { EdituserComponent } from '../edituser/edituser.component';
 
 @Component({
   selector: 'app-employees',
@@ -14,7 +16,8 @@ export class EmployeesComponent implements OnInit {
   employees:Array<Employee>;
   isLogin : boolean;
   role:Role;
-  constructor(private employeeService:UserService,private router:Router) { }
+  dialogResult: any;
+  constructor(private employeeService:UserService,private router:Router ,private dialog :MatDialog) { }
 
   ngOnInit() {
     this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
@@ -33,11 +36,26 @@ export class EmployeesComponent implements OnInit {
   }
 
   editEmployee(employee: Employee) {
-    
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose=true;
+    dialogConfig.width="400px";
+    dialogConfig.autoFocus=true;
+    let dialogRef = this.dialog.open(EdituserComponent,dialogConfig);
+    dialogRef.componentInstance.data=employee;
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog closed: ${result}`);
+      if(result=="Edit"){
+        this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
+          this.employees = text;
+        });
+      }
+      this.dialogResult = result;
+
+    })
   }
 
   deleteEmployee(id: number) {
-    
+    console.log('delete + '+ id);
   }
   checkIsLogin(){
     var pom = window.sessionStorage.getItem('user');

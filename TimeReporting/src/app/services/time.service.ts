@@ -38,7 +38,6 @@ export class TimeService {
     this.http.delete('http://localhost:8080/timereports/'+id).subscribe();
   }
   editTimereport(timereport:Timereport){
-    console.log(timereport);
     this.http.put('http://localhost:8080/timereports',{
       "id":timereport.id,
       "date":timereport.date,

@@ -1,4 +1,5 @@
 import { Timereport } from './timereport';
+import { Role } from './role';
 
 export class Employee{
   get totalHours(): number {
@@ -22,7 +23,13 @@ export class Employee{
     private _time:Timereport;
     private _projectId : number;
     private _totalHours:number;
-
+    private _role:Role;
+  get role(): Role{
+    return this._role;
+  }
+  set role(value:Role){
+    this._role = value;
+  }
   get time(): Timereport {
     return this._time;
   }
@@ -31,7 +38,7 @@ export class Employee{
     this._time = value;
   }
 
-  constructor(id: number, firstName: string, lastName: string, username: string, password: string, email: string, dateJoining: Date) {
+  constructor(id: number, firstName: string, lastName: string, username: string, password: string, email: string, dateJoining: Date,embg:string) {
     this._id = id;
     this._firstName = firstName;
     this._lastName = lastName;
@@ -39,6 +46,7 @@ export class Employee{
     this._password = password;
     this._email = email;
     this._dateJoining = dateJoining;
+    this._embg  =  embg;
 
   }
 

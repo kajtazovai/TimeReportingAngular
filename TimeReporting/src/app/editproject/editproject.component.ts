@@ -20,17 +20,11 @@ export class EditprojectComponent implements OnInit {
   constructor(private  projectService:ProjectService,@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<ProjectComponent>) { }
 
   ngOnInit() {
-    console.log(this.data);
     this.name=this.data.name;
     this.budget = this.data.budget;
     this.id = this.data.id;
 
   }
-
-  changeName($event) {
-    this.name=$event;
-  }
-
   onCloseCancel() {
     this.dialogRef.close('Close');
   }
@@ -41,8 +35,10 @@ export class EditprojectComponent implements OnInit {
     this.dialogRef.close("Edit");
     alert("Successfully edited");
   }
-
-  changeBudget($event) {
+  changeName($event){
+    this.name= $event;
+  }
+  changeBudget($event){
     this.budget = $event;
   }
 }

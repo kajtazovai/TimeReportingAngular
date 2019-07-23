@@ -38,7 +38,7 @@ export class NewtimereportComponent implements OnInit {
     var parsed = JSON.parse(session);
     this.role = new Role(parsed.role.id);
     if(this.role.id!==1) {
-      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining);
+      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg);
     }
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();

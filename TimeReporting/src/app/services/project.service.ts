@@ -32,9 +32,11 @@ export class ProjectService {
 
   editProject(selectedProject: Project) {
     return this.http.put('http://localhost:8080/projects',{
-      'id':selectedProject.id,
-      'name':selectedProject.name,
-      'budget':selectedProject.budget
-    })
+      "id":selectedProject.id,
+      "name":selectedProject.name,
+      "budget":selectedProject.budget
+    },{
+      'responseType':'text'
+    }).subscribe();
   }
 }
