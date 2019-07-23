@@ -33,13 +33,11 @@ export class EdituserComponent implements OnInit {
     this.username = this.data.username;
     this.email = this.data.email;
     this.id = this.data.id;
-    console.log(this.id);
 
   }
   editEmployee(){
     this.employee = new Employee(this.id,this.firstName,this.lastName,this.username,this.password,this.email,this.dateJoining,this.embg);
     this.employeeService.editUser(this.employee);
-    console.log(this.employee);
     this.dialogRef.close('Edit');
     alert("Successfully edited");
   }

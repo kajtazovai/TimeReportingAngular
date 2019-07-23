@@ -49,9 +49,12 @@ export class UserService {
       "lastName": employee.lastName,
       "embg": employee.embg,
       "dateJoining": employee.dateJoining,
-      "username": employee.dateJoining,
+      "username": employee.username,
       "password": employee.password,
       "email": employee.email,
+      "role":{
+        "id":employee.role.id,
+      }
     }, {
         'responseType': 'text'
       }).subscribe();
