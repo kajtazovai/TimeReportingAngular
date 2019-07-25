@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -17,7 +18,7 @@ export class CreateUserComponent implements OnInit {
   role:number;
   rolename:string;
   projectId:number;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router :Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +27,7 @@ export class CreateUserComponent implements OnInit {
         if(firstname!="" && lastname!="" && embg!="" && username!=""&& password!=""&& datejoining!="" && role!="" && rolename!="")
         {
           alert("Successfull create user");
+        this.router.navigate(['employees']);
         }
         else{
           alert("All fields are mandatory");

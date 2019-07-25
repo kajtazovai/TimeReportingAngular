@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Role} from "../models/role";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EdituserComponent } from '../edituser/edituser.component';
+import { DeleteemployeeComponent } from '../deleteemployee/deleteemployee.component';
 
 @Component({
   selector: 'app-employees',
@@ -55,13 +56,29 @@ export class EmployeesComponent implements OnInit {
   }
 
   deleteEmployee(id: number) {
-    console.log('delete + '+ id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose=true;
+    dialogConfig.width="400px";
+    dialogConfig.autoFocus=true;
+    let dialogRef = this.dialog.open(DeleteemployeeComponent,dialogConfig);
+    dialogRef.componentInstance.data=id;
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog closed: ${result}`);
+      if(result=="Delete"){
+        this.employees = new Array<Employee>();
+        this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
+          this.employees = text;
+        });
+      }
+      this.dialogResult = result;
+
+    })
   }
   checkIsLogin(){
     var pom = window.sessionStorage.getItem('user');
     if(pom!=null){
       var parsed = JSON.parse(pom);
-      this.role = new Role(parsed.role.id);
+      this.role = new Role(parsed.role.id,parsed.role.name);
       this.isLogin= true;
     }
     else{

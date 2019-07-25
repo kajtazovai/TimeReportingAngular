@@ -4,7 +4,7 @@
       <label>Project Name</label>
       <input class="form-control" type="text" [(ngModel)]="name" placeholder="Name" (ngModelChange)="changeName($event)"><br>
       <label>Budget</label>
-      <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget" (ngModelChange)="changeBudget($event)"><br>
+      <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget" (ngModelChange)="changeBudget($event)" min="1"><br>
     <div class="row">
       <div class="col-md-6"><button class="form-control btn btn-success" (click)="editProject()">Save</button></div>
       <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>

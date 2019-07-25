@@ -46,7 +46,7 @@ export class EdittimereportComponent implements OnInit {
     this.projectName = this.data.projectName;
     var currentUser = window.sessionStorage.getItem('user');
     var parsed = JSON.parse(currentUser);
-    this.selectedEmployee = new Employee(parsed.id,parsed.firstName,parsed.lastName,parsed.username,parsed.password,parsed.email,parsed.dateJoining,parsed.embg);
+    this.selectedEmployee = new Employee(parsed.id,parsed.firstName,parsed.lastName,parsed.username,parsed.password,parsed.email,parsed.dateJoining,parsed.embg,parsed.role);
     this.projects = new Array<Project>();
     this.projectService.getProjects().subscribe((text:Array<Project>)=>{
       this.projects = text;

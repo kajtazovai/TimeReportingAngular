@@ -43,6 +43,7 @@ export class UserService {
     return this.http.get("http://localhost:8080/employee");
   }
   editUser(employee: Employee) {
+  
     return this.http.put("http://localhost:8080/employee", {
       "id":employee.id,
       "firstName": employee.firstName,
@@ -54,9 +55,14 @@ export class UserService {
       "email": employee.email,
       "role":{
         "id":employee.role.id,
+        "name":employee.role.name,
       }
     }, {
         'responseType': 'text'
       }).subscribe();
   }
+  removeEmployee(id:Number){
+    this.http.delete('http://localhost:8080/employee/'+id).subscribe();
+  }
+  
 }

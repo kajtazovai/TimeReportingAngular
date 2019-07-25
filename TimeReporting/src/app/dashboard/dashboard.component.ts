@@ -41,7 +41,15 @@ export class DashboardComponent implements OnInit {
         }
       }
       this.hours = pom;
-      this.salary = this.hours*500;
+      var parsedSession = JSON.parse(session);
+      console.log(parsedSession);
+      if(parsedSession.role.id==1){
+      this.salary = this.hours*2500;
+      }
+      else{
+        this.salary = this.hours*1500;
+      }
+      this.createChart();
     });
   }
   createChart(){
@@ -65,16 +73,10 @@ export class DashboardComponent implements OnInit {
         }]
       },
       options: {
-
-        scales: {
-          yAxes: [{
-            type:'linear',
-            ticks: {
-              beginAtZero: true,
-              max:240
-            }
-          }]
-        }
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
       }
     });
     this.hoursChart = new Chart('hours', {
@@ -95,16 +97,10 @@ export class DashboardComponent implements OnInit {
         }]
       },
       options: {
-
-        scales: {
-          yAxes: [{
-            type:'linear',
-            ticks: {
-              beginAtZero: true,
-              max:240000
-            }
-          }]
-        }
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
       }
     });
 

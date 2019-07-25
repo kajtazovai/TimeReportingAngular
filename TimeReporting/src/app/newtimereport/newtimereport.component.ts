@@ -36,9 +36,9 @@ export class NewtimereportComponent implements OnInit {
   ngOnInit() {
     var session  = window.sessionStorage.getItem('user');
     var parsed = JSON.parse(session);
-    this.role = new Role(parsed.role.id);
+    this.role = new Role(parsed.role.id,parsed.role.name);
     if(this.role.id!==1) {
-      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg);
+      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role);
     }
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();
@@ -51,7 +51,8 @@ export class NewtimereportComponent implements OnInit {
     })
   }
   createTime(){
-    if(this.hours!=null && this.selectedEmployee!=null && this.selectedProject!=null){
+    console.log(this.selectedEmployee.id)
+    if(this.hours!=null && this.selectedEmployee.id!=null && this.selectedProject.id!=null){
       this.timereportService.createTime(this.date, this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
         if (this.date != null && this.hours > 0) {
 

@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     var pom = window.sessionStorage.getItem('user');
     if(pom!=null){
       var parsed = JSON.parse(pom);
-      this.role = new Role(parsed.role.id);
+      this.role = new Role(parsed.role.id,parsed.role.name);
       this.isLogin= true;
     }
     else{

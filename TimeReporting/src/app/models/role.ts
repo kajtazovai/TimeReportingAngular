@@ -18,7 +18,8 @@ export class Role {
     this._name = value;
   }
 
-  constructor(id:number) {
+  constructor(id:number,name:string) {
     this._id = id;
+    this._name  = name;
   }
 }

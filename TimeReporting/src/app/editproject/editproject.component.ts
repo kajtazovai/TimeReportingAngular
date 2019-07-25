@@ -39,6 +39,11 @@ export class EditprojectComponent implements OnInit {
     this.name= $event;
   }
   changeBudget($event){
-    this.budget = $event;
+    if($event==0){
+    this.budget = 1;
+    }
+    else{
+      this.budget =$event;
+    }
   }
 }

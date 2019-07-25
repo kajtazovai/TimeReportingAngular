@@ -19,7 +19,7 @@ export class DeletedialogtimereportComponent implements OnInit {
   ngOnInit() {
   }
 
-  delete(){
+  deleteTimereport (){
     this.timereportService.deleteById(this.data);
     this.dialogRef.close("Delete");
     alert("Successfully deleted");

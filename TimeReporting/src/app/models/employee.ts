@@ -38,7 +38,7 @@ export class Employee{
     this._time = value;
   }
 
-  constructor(id: number, firstName: string, lastName: string, username: string, password: string, email: string, dateJoining: Date,embg:string) {
+  constructor(id: number, firstName: string, lastName: string, username: string, password: string, email: string, dateJoining: Date,embg:string,role:Role) {
     this._id = id;
     this._firstName = firstName;
     this._lastName = lastName;
@@ -47,6 +47,7 @@ export class Employee{
     this._email = email;
     this._dateJoining = dateJoining;
     this._embg  =  embg;
+    this._role = role;
 
   }
 

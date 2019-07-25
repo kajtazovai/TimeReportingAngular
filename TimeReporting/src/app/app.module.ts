@@ -30,6 +30,7 @@ import { DeleteprojectComponent } from './deleteproject/deleteproject.component'
 import { EditprojectComponent } from './editproject/editproject.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeleteemployeeComponent } from './deleteemployee/deleteemployee.component';
 
 
 
@@ -51,6 +52,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EmployeesComponent,
     DashboardComponent,
     EdituserComponent,
+    DeleteemployeeComponent,
 
   ],
   imports: [
@@ -72,7 +74,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   providers: [UserService,FormsModule,ProjectService,HttpClientModule],
   bootstrap: [AppComponent],
-  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent,DeleteprojectComponent,EditprojectComponent,EdituserComponent]
+  entryComponents:[NewtimereportComponent,DeletedialogtimereportComponent,EdittimereportComponent,DeleteprojectComponent,EditprojectComponent,EdituserComponent,DeleteemployeeComponent]
 })
 export class AppModule {
     
