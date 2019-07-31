@@ -4,45 +4,46 @@
       <label>First Name</label>
       <input class="form-control" type="text" [(ngModel)]="firstName" placeholder="First Name"
         (ngModelChange)="changeFirstName($event)"><br>
-        <p [(ngModel)]="firstName" *ngIf="firstName==''" class="text-danger">*Insert first name</p>
+      <p [(ngModel)]="firstName" *ngIf="firstName==''" class="text-danger">*Insert first name</p>
       <label>Last Name</label>
       <input class="form-control" type="text" [(ngModel)]="lastName" placeholder="Last Name"
         (ngModelChange)="changeLastName($event)"><br>
-        <p [(ngModel)]="firstName" *ngIf="lastName==''" class="text-danger">*Insert last name</p>
+      <p [(ngModel)]="firstName" *ngIf="lastName==''" class="text-danger">*Insert last name</p>
       <label>EMBG</label>
       <input class="form-control" type="text" [(ngModel)]="embg" placeholder="EMBG"
         (ngModelChange)="changeEMBG($event)"><br>
-        <p [(ngModel)]="firstName" *ngIf="embg==''" class="text-danger">*Embg must be with 13 numbers</p>
+      <p [(ngModel)]="firstName" *ngIf="embg==''" class="text-danger">*Embg must be with 13 numbers</p>
       <mat-form-field class="calendarreport" style="width: 100%">
         <label>Date of Joining</label>
         <input matInput [matDatepicker]="picker" [(ngModel)]="dateJoining" (ngModelChange)="changeDateJoining($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <p [(ngModel)]="dateJoining" *ngIf="dateJoining==null" class="text-danger">*Insert date joining</p>
-      <label>Role</label>
-      <input class="form-control" type="number" [(ngModel)]="role.id" placeholder="1(Admin) , 0 (Programmer)"
-        (ngModelChange)="changeRole($event)" min="0" max="1" ><br>
-        <p [(ngModel)]="role.id" *ngIf="role.id==null" class="text-danger">*Insert role id</p>
     </div>
     <div class="col-md-6">
+      <p [(ngModel)]="dateJoining" *ngIf="dateJoining==null" class="text-danger">*Insert date joining</p>
+      <mat-form-field>
+        <mat-label>{{selectedRole.name}}</mat-label>
+        <mat-select [(ngModel)]="selectedRole" (ngModelChange)="changeRole($event)" name="role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+        </mat-select>
+      </mat-form-field><br>
       <label>Email</label>
       <input class="form-control" type="text" [(ngModel)]="email" placeholder="Email"
         (ngModelChange)="changeEmail($event)" required><br>
-        <p [(ngModel)]="email" *ngIf="email==''" class="text-danger">*Insert email</p>
+      <p [(ngModel)]="email" *ngIf="email==''" class="text-danger">*Insert email</p>
       <label>Username</label>
       <input class="form-control" type="text" [(ngModel)]="username" placeholder="Username"
         (ngModelChange)="changeUsername($event)"><br>
-        <p [(ngModel)]="username" *ngIf="username==''" class="text-danger">*Insert username</p>
-        <label>Password</label>
+      <p [(ngModel)]="username" *ngIf="username==''" class="text-danger">*Insert username</p>
+      <label>Password</label>
       <input class="form-control" type="password" [(ngModel)]="password" placeholder="Password"
         (ngModelChange)="changePassword($event)"><br>
-        <p [(ngModel)]="password" *ngIf="password==''" class="text-danger">*Insert password</p>
+      <p [(ngModel)]="password" *ngIf="password==''" class="text-danger">*Insert password</p>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6"><button class="form-control btn btn-success" (click)="editEmployee()">Save</button></div>
     <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
-
   </div>
 </div>

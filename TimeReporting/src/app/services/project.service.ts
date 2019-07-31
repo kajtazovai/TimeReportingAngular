@@ -39,4 +39,7 @@ export class ProjectService {
       'responseType':'text'
     }).subscribe();
   }
+  getRoles(){
+    return this.http.get("http://localhost:8080/roles");
+  }
 }

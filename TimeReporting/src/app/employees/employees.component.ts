@@ -39,7 +39,7 @@ export class EmployeesComponent implements OnInit {
   editEmployee(employee: Employee) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose=true;
-    dialogConfig.width="400px";
+    dialogConfig.width="640px";
     dialogConfig.autoFocus=true;
     let dialogRef = this.dialog.open(EdituserComponent,dialogConfig);
     dialogRef.componentInstance.data=employee;

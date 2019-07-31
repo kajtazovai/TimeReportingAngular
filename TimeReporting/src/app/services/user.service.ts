@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { Employee } from '../models/employee';
+import { Role } from '../models/role';
+import { Project } from '../models/project';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,7 @@ export class UserService {
         'responseType': "json"
       });
   }
-  createUser(firstname: string, lastname: string, embg: string, datejoining: Date, username: string, password: string, email: string, role: number, rolename: string, projectId: number): Observable<Object> {
+  createUser(firstname: string, lastname: string, embg: string, datejoining: Date, username: string, password: string, email: string, role:Role, project: Project): Observable<Object> {
     return this.http.post('http://localhost:8080/employee', {
       "firstName": firstname,
       "lastName": lastname,
@@ -28,11 +30,11 @@ export class UserService {
       "password": password,
       "email": email,
       "role": {
-        "id": role,
-        "name": rolename
+        "id": role.id,
+        "name": role.name
       },
       "projects": [{
-        "id": projectId
+        "id": project.id,
       }]
     }, {
         responseType: "arraybuffer"

@@ -1,32 +1,49 @@
 <app-header></app-header>
 <div class="timereportsDays">
-  <button (click)="onCreate()" class="btn btn-primary" ><i class="glyphicon glyphicon-plus icons-before"></i>Create</button>
-  <button class="btn btn-default beforeWeek"><i class="glyphicon glyphicon-chevron-left icons-before"></i>Before week</button>
+  <button (click)="onCreate()" class="btn btn-primary"><i
+      class="glyphicon glyphicon-plus icons-before"></i>Create</button>
+  <button class="btn btn-default beforeWeek" (click)=clickLastWeek()>
+    <i class="glyphicon glyphicon-chevron-left icons-before"></i>
+    Before week</button>
   <mat-form-field class="calendarreport">
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="mydate">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <button  class= " btn btn-default nextWeek">Next week<i class="glyphicon glyphicon-chevron-right icons-next"></i></button>
-  <button class="btn btn-success " (click)="searchWithDate()">Search</button>
-  <table class="table table-bordered mat-table timereportsTable" >
+  <button class=" btn btn-default nextWeek" (click)="clickNextWeek()"> 
+    Next week
+    <i class="glyphicon glyphicon-chevron-right icons-next"></i>
+  </button>
+  <button class="btn btn-success " (click)="searchWithDate()">Search</button><br>
+  <label>Current week: {{fromtoweeks}}</label>
+  <table class="table table-bordered mat-table timereportsTable">
     <thead>
-    <tr>
-      <th>Hours</th>
-      <th>Employee</th>
-      <th>Project</th>
-      <th>Date</th>
-      <td></td>
-    </tr>
+      <tr>
+        <th>Projects</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th class="weekend">Sat</th>
+        <th class="weekend">Sun</th>
+        
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let timereport of timereports" >
-      <td>{{timereport.hours}}</td>
-      <td>{{timereport.employeeName}}</td>
-      <td> {{timereport.projectName}}</td>
-      <td> {{timereport.date | date}}</td>
-      <td><button class="btn btn-default edit-btn" id="{{timereport.id}}" (click)="editTimereport(timereport)"><i class="glyphicon glyphicon-pencil icons"></i></button> <button class="btn btn-danger remove-btn" (click)="deleteTimereport(timereport.id)"><i class="glyphicon glyphicon-remove icons"></i></button></td>
-    </tr>
+      <tr *ngFor="let timereport of timereports">
+        <td>{{timereport.projectName}}</td>
+        <td>{{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <td> {{timereport.hours}}</td>
+        <!-- <td><button class="btn btn-default edit-btn" id="{{timereport.id}}" (click)="editTimereport(timereport)"><i
+              class="glyphicon glyphicon-pencil icons"></i></button> <button class="btn btn-danger remove-btn"
+            (click)="deleteTimereport(timereport.id)"><i class="glyphicon glyphicon-remove icons"></i></button></td> -->
+      </tr>
     </tbody>
   </table>
 </div>

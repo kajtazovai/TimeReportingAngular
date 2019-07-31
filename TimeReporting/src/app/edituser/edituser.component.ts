@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { EmployeesComponent } from '../employees/employees.component';
 import { Employee } from '../models/employee';
 import { Role } from '../models/role';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-edituser',
@@ -16,12 +17,13 @@ export class EdituserComponent implements OnInit {
   lastName:string;
   embg:string;
   dateJoining:Date;
-  role:Role;
+  selectedRole:Role;
   email:string;
   username:string;
   password:string;
   employee:Employee;
-  constructor( private employeeService:UserService,@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<EmployeesComponent>) { }
+  roles:Array<Role>;
+  constructor( private employeeService:UserService,@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<EmployeesComponent>,private projectService:ProjectService) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -30,15 +32,19 @@ export class EdituserComponent implements OnInit {
     this.embg =this.data.embg;
     var date = new Date(this.data.dateJoining);
     this.dateJoining = date;
-    this.role = this.data.role;
+    this.selectedRole = this.data.role;
     this.username = this.data.username;
     this.email = this.data.email;
     this.id = this.data.id;
+    this.roles= new Array<Role>();
+    this.projectService.getRoles().subscribe((text: Array<Role>) => {
+      this.roles = text;
+    });
 
   }
   editEmployee(){
-    if(String(this.embg).length==13 && this.firstName!=''&& this.lastName!=''&& this.password!=null&&this.email!=""&& this.dateJoining!=null&&this.role.id!=null){
-    this.employee = new Employee(this.id,this.firstName,this.lastName,this.username,this.password,this.email,this.dateJoining,this.embg,this.role);
+    if(String(this.embg).length==13 && this.firstName!=''&& this.lastName!=''&& this.password!=null&&this.email!=""&& this.dateJoining!=null&&this.selectedRole.id!=null){
+    this.employee = new Employee(this.id,this.firstName,this.lastName,this.username,this.password,this.email,this.dateJoining,this.embg,this.selectedRole);
     this.employeeService.editUser(this.employee);
     this.dialogRef.close('Edit');
     alert("Successfully edited");
@@ -72,11 +78,6 @@ export class EdituserComponent implements OnInit {
     this.password = $event;
   }
   changeRole($event){
-    if($event==1){
-      this.role = new Role($event,"Admin");
-    }
-    else{
-      this.role = new Role($event,"Programmer");
-    }
+    
   }
 }

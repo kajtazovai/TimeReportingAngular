@@ -22,11 +22,12 @@
                 <input placeholder="ex.22/03/2019" class="form-group form-control" type="date" name="datejoining"
                     [(ngModel)]="datejoining">
             </div>
-          <div class="form-field">
-            <label class="form-group">Project id</label><br>
-            <input placeholder="ex.(1)-Roject id" class="form-group form-control"  type="number" name="projectId"
-                   [(ngModel)]="projectId">
-          </div>
+            <mat-form-field>
+                <mat-label>Select project</mat-label>
+                <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProjectId($event)" name="project">
+                  <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
         <div class="col-md-6">
             <div class="form-field">
@@ -44,16 +45,12 @@
                 <input placeholder="ex.password" class="form-group form-control" type="password" name="password"
                     [(ngModel)]="password">
             </div>
-            <div class="form-field">
-                <label class="form-group">Role</label><br>
-                <input placeholder="ex.(1)-Programer" class="form-group form-control"  type="number" name="role"
-                    [(ngModel)]="role">
-            </div>
-            <div class="form-field">
-                <label class="form-group">Role name</label><br>
-                <input placeholder="ex.(1)-Programer" class="form-group form-control"  type="text" name="rolename"
-                    [(ngModel)]="rolename">
-            </div>
+            <mat-form-field>
+                <mat-label>Select role</mat-label>
+                <mat-select  [(ngModel)]="selectedRole" (ngModelChange)="changeRole($event)" name="role">
+                  <mat-option *ngFor="let role of roles" [value]="role" >{{role.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
         </div>
     </div>
