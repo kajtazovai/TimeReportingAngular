@@ -31,6 +31,7 @@ import { EditprojectComponent } from './editproject/editproject.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeleteemployeeComponent } from './deleteemployee/deleteemployee.component';
+import { UserreportComponent } from './userreport/userreport.component';
 
 
 
@@ -53,6 +54,7 @@ import { DeleteemployeeComponent } from './deleteemployee/deleteemployee.compone
     DashboardComponent,
     EdituserComponent,
     DeleteemployeeComponent,
+    UserreportComponent,
 
   ],
   imports: [
