@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Timereport } from '../models/timereport';
 import { TimeService } from '../services/time.service';
 import * as moment from 'moment';
@@ -8,17 +8,10 @@ import * as moment from 'moment';
   styleUrls: ['./userreport.component.css']
 })
 export class UserreportComponent implements OnInit {
-  timereports: Array<Timereport>;
-  startDate: String;
-  endDate: String;
-  hours:Number;
-  currentDate: Date;
-  fromtoweeks: String;
-  constructor(private timereportService: TimeService) { }
+  @Input() timereport:Timereport ;
+  constructor() { }
 
   ngOnInit() {
-  
- 
   }
   
 

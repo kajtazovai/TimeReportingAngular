@@ -1,16 +1,13 @@
 import { Employee } from './employee';
+import { Project } from './project';
 
 export class Timereport {
 
     private _date: Date;
     private _hours: number;
-    private _employeeId :number;
-    private _projectId:number;
-    private _projectName:string;
-    private _employeeName:string;
+    private _employee:Employee;
+    private _project :Project;
     private _id : number;
-
-
 
   get id(): number {
     return this._id;
@@ -20,48 +17,28 @@ export class Timereport {
     this._id = value;
   }
 
-  get projectName(): string {
-    return this._projectName;
+  get project():Project{
+    return this._project;
   }
-
-  set projectName(value: string) {
-    this._projectName = value;
+  set project(project:Project){
+    this._project=project;
   }
-
-  get employeeName(): string {
-    return this._employeeName;
+  get employee():Employee{
+      return this._employee;
   }
-
-  set employeeName(value: string) {
-    this._employeeName = value;
+  set employee(employee:Employee){
+    this._employee = employee;
   }
-
-  get employeeId(): number {
-    return this._employeeId;
-  }
-
-  set employeeId(value: number) {
-    this._employeeId = value;
-  }
-
-  get projectId(): number {
-    return this._projectId;
-  }
-
-  set projectId(value: number) {
-    this._projectId = value;
-  }
-  constructor(hours: number,employeeId:number,projectId:number,employeeName:string,projectName:string,id:number,date:Date) {
+  
+  constructor(hours: number,id:number,date:Date,employee:Employee,project:Project) {
     this._hours = hours;
-    this._employeeId = employeeId;
-    this._projectId = projectId;
-    this._projectName = projectName;
-    this._employeeName=employeeName;
+    this._employee = employee;
+    this._project=project;
     this._id  = id;
     this._date = date;
   
   }
-
+  
   get date(): Date {
     return this._date;
   }

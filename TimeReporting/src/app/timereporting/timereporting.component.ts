@@ -14,6 +14,7 @@ import { Router } from "@angular/router";
 import { EdittimereportComponent } from "../edittimereport/edittimereport.component";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { ProjectService } from '../services/project.service';
+import { Row } from '../models/row';
 
 
 
@@ -36,30 +37,33 @@ export class TimereportingComponent implements OnInit {
   fromtoweeks: String;
   startDate: String;
   endDate: String;
+  rows: Array<Row>;
 
-  constructor(private timereportService: TimeService, private dialog: MatDialog, private router: Router, private projectService:ProjectService) {
+  constructor(private timereportService: TimeService, private dialog: MatDialog, private router: Router, private projectService: ProjectService) {
     this.timereports = new Array<Timereport>();
   }
   ngOnInit() {
     var pom = window.sessionStorage.getItem('user');
     if (pom != null) {
       this.projects = new Array<Project>();
-      let currentweeks = moment();
-      var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
-      var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
-      this.fromtoweeks = start.toString() + " to " + end.toString();
-      this.startDate = start.toString();
-      this.endDate = end.toString();
-      this.getTimereports();
-      this.projectService.getProjects().subscribe((text:Array<Project>)=>{
+      this.getCurrentDate();
+      this.projectService.getProjects().subscribe((text: Array<Project>) => {
         this.projects = text;
+        this.getTimereportsByDate();
       })
     }
     else {
       this.router.navigate(['/login']);
     }
   }
-
+  getCurrentDate(){
+      let currentweeks = moment();
+      var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+      var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+      this.fromtoweeks = start.toString() + " to " + end.toString();
+      this.startDate = start.toString();
+      this.endDate = end.toString();
+  }
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -79,27 +83,11 @@ export class TimereportingComponent implements OnInit {
   getTimereports() {
     this.timereports = new Array<Timereport>();
     var session = window.sessionStorage.getItem('user');
-    this.timereportService.getTimereports().subscribe(text => {
-      var pom = text as Timereport[];
-      var parsed = JSON.parse(pom.toString());
-      var list = new Array<Timereport>();
-      list = parsed;
-      for (var i = 0; i < list.length; i++) {
-        var hours = parseInt(parsed[i].hours);
-        var employeeId = parseInt(parsed[i].employee.id);
-        var projectId = parseInt(parsed[i].project.id);
-        var employeeName = String(parsed[i].employee.firstName);
-        var projectName = String(parsed[i].project.name);
-        var id = parseInt(parsed[i].id);
-        var date = parsed[i].date;
-        var parsedSession = JSON.parse(session);
-        if (employeeId === parsedSession.id) {
-          this.timereports.push(new Timereport(hours, employeeId, projectId, employeeName, projectName, id, date));
-        }
-      }
+    this.timereportService.getTimereports().subscribe((list:Array<Timereport>) => {
+      this.timereports = list;
     });
   }
-  
+
   deleteTimereport(id: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -155,14 +143,10 @@ export class TimereportingComponent implements OnInit {
     var fromDate = moment(this.startDate.toString());
     var toDate = moment(this.endDate.toString());
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-      .subscribe(text => {
-        var pom = text as Timereport[];
-        var parsed = JSON.parse(pom.toString());
-        var list = new Array<Timereport>();
-        list = parsed;
+      .subscribe((list:Array<Timereport>)=>{
         this.timereports = list;
+        this.fillData();
       });
-
   }
   clickLastWeek() {
     var session = window.sessionStorage.getItem('user');
@@ -178,35 +162,56 @@ export class TimereportingComponent implements OnInit {
     var fromDate = moment(this.startDate.toString());
     var toDate = moment(this.endDate.toString());
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-      .subscribe(text => {
-        var pom = text as Timereport[];
-        var parsed = JSON.parse(pom.toString());
-        var list = new Array<Timereport>();
-        list = parsed;
+      .subscribe((list:Array<Timereport>)=> {
         this.timereports = list;
-      });
-    }
-changeValue($event){
-
-}
-getTimereportsByDate() {
-  this.timereports = new Array<Timereport>();
-  var session = window.sessionStorage.getItem('user');
-  var parsedSession = JSON.parse(session);
-  var fromDate = moment(this.startDate.toString());
-  var toDate = moment(this.endDate.toString());
-  this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-    .subscribe(text => {
-      var pom = text as Timereport[];
-      var parsed = JSON.parse(pom.toString());
-      var list = new Array<Timereport>();
-      list = parsed;
-      this.timereports = list;
-      console.log(this.timereports);
-
+        this.fillData();
     });
-}
+  }
+  getTimereportsByDate() {
+    this.timereports = new Array<Timereport>();
+    var session = window.sessionStorage.getItem('user');
+    var parsedSession = JSON.parse(session);
+    var fromDate = moment(this.startDate.toString());
+    var toDate = moment(this.endDate.toString());
+    this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
+      .subscribe((list:Array<Timereport>)=> {
+        this.timereports = list;
+        this.fillData();
 
+      });
+  }
+
+  fillData() { 
+      this.rows = new Array<Row>();
+      this.projects.forEach(project => {
+        let row = new Row();
+        row.project = project;
+        row.timereports = new Array<Timereport>();
+        this.fillTimereport(row);
+        this.rows.push(row);
+      });
+  }
+  fillTimereport(row:Row){
+      var currentDate = moment(this.startDate.toString());
+      var endDate = moment(this.endDate.toString());
+      while(true){
+        if(currentDate>=endDate){
+          break;
+        }
+        currentDate = currentDate.add('day',1);
+        let timereport = this.findTimereport(row.project.id,currentDate.toDate());
+        row.timereports.push(timereport);
+      }
+  }
+  findTimereport(projectId:Number,date:Date):Timereport{
+    this.timereports.forEach(timereport => {
+      var current = moment(date).format('YYYY-MM-DD');
+       if(projectId==timereport.project.id && current==timereport.date.toString()){
+         return timereport;
+      }
+    });
+    return new Timereport(0,null,date,null,null);
+  }
 
 
 

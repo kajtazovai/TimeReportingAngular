@@ -25,9 +25,7 @@ export class TimeService {
     });
   }
   getTimereports():Observable<Object>{
-    return this.http.get("http://localhost:8080/timereports",{
-      'responseType':'text'
-    });
+    return this.http.get("http://localhost:8080/timereports");
   }
   findTimereportById(id:number){
     return this.http.get("http://localhost:8080/timereports/"+id,{
@@ -44,10 +42,10 @@ export class TimeService {
       "date":timereport.date,
       "hours":timereport.hours,
       "employee":{
-        "id":timereport.employeeId
+        "id":timereport.employee.id
       },
       "project":{
-        "id":timereport.projectId
+        "id":timereport.project.id
       },
     },{
       'responseType':'text'
@@ -57,7 +55,7 @@ export class TimeService {
     var start = moment(startDate.toISOString()).format('YYYY-MM-DD');
     var end = moment(endDate.toISOString()).format('YYYY-MM-DD');
     console.log(start + " " +end );
-    return this.http.get("http://localhost:8080/timereports/filterByDate?startDate="+start.toString()+"&endDate="+end.toString()+"&employeeId="+employeeId,{'responseType':'text'});
+    return this.http.get("http://localhost:8080/timereports/filterByDate?startDate="+start.toString()+"&endDate="+end.toString()+"&employeeId="+employeeId);
   }
 
 }

@@ -24,25 +24,23 @@ export class DashboardComponent implements OnInit {
     this.timereports = new Array<Timereport>();
     var pom = 0;
     var session = window.sessionStorage.getItem('user');
-    this.timereportService.getTimereports().subscribe((text:Array<Timereport>)=> {
-      var list = text;
-      var parsed = JSON.parse(list.toString());
-      for (var i = 0; i < parsed.length; i++) {
-        var hours = parsed[i].hours;
-        var employeeId = parsed[i].employee.id;
-        var projectId = parsed[i].projectId;
-        var employeeName =parsed[i].employeeName;
-        var projectName =parsed[i].projectName;
-        var id = parsed[i].id;
-        var date = parsed[i].date;
+    this.timereportService.getTimereports().subscribe((list:Array<Timereport>)=> {
+      let array = list;
+      for (var i = 0; i < array.length; i++) {
+        var hours = array[i].hours;
+        var employeeId = array[i].employee.id;
+        var projectId = array[i].project.id;
+        var employeeName =array[i].employee.firstName;
+        var projectName =array[i].project.name;
+        var id = array[i].id;
+        var date = array[i].date;
         var parsedSession = JSON.parse(session);
         if (employeeId === parsedSession.id) {
-          pom+=parsed[i].hours;
+          pom+=array[i].hours;
         }
       }
       this.hours = pom;
       var parsedSession = JSON.parse(session);
-      console.log(parsedSession);
       if(parsedSession.role.id==1){
       this.salary = this.hours*2500;
       }
