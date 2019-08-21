@@ -9,7 +9,7 @@ import {ProjectService} from "../services/project.service";
 import {Role} from "../models/role";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-newtimereport',
@@ -51,9 +51,11 @@ export class NewtimereportComponent implements OnInit {
     })
   }
   createTime(){
-    console.log(this.selectedEmployee.id)
+    var date = moment(this.date);
+    date = date.add('day',1);
+    var currentDate = date.format('YYYY-MM-DD');
     if(this.hours!=null && this.selectedEmployee.id!=null && this.selectedProject.id!=null){
-      this.timereportService.createTime(this.date, this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
+      this.timereportService.createTime(new Date(currentDate.toString()), this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
         if (this.date != null && this.hours > 0) {
 
           this.dialogRef.close("Create");

@@ -1,13 +1,13 @@
 export class Project{
    private _name:string;
-   private _budget:number;
-   private _id:number;
+   private _budget:Number;
+   private _id:Number;
 
-  get id(): number {
+  get id(): Number {
     return this._id;
   }
 
-  set id(value: number) {
+  set id(value: Number) {
     this._id = value;
   }
 
@@ -19,15 +19,15 @@ export class Project{
     this._name = value;
   }
 
-  get budget(): number {
+  get budget(): Number {
     return this._budget;
   }
 
-  set budget(value: number) {
+  set budget(value: Number) {
     this._budget = value;
   }
 
-  constructor(name: string,id:number,budget:number) {
+  constructor(name: string,id:Number,budget:Number) {
     this._name = name;
     this._id = id;
     this._budget = budget;

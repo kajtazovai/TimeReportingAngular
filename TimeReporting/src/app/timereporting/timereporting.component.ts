@@ -56,13 +56,13 @@ export class TimereportingComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  getCurrentDate(){
-      let currentweeks = moment();
-      var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
-      var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
-      this.fromtoweeks = start.toString() + " to " + end.toString();
-      this.startDate = start.toString();
-      this.endDate = end.toString();
+  getCurrentDate() {
+    let currentweeks = moment();
+    var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+    var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+    this.fromtoweeks = start.toString() + " to " + end.toString();
+    this.startDate = start.toString();
+    this.endDate = end.toString();
   }
 
   onCreate() {
@@ -74,7 +74,7 @@ export class TimereportingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
       if (result == "Create") {
-        this.getTimereports();
+        this.getTimereportsByDate();
       }
       this.dialogResult = result;
 
@@ -83,7 +83,7 @@ export class TimereportingComponent implements OnInit {
   getTimereports() {
     this.timereports = new Array<Timereport>();
     var session = window.sessionStorage.getItem('user');
-    this.timereportService.getTimereports().subscribe((list:Array<Timereport>) => {
+    this.timereportService.getTimereports().subscribe((list: Array<Timereport>) => {
       this.timereports = list;
     });
   }
@@ -103,7 +103,6 @@ export class TimereportingComponent implements OnInit {
       this.dialogResult = result;
 
     })
-    console.log(id);
   }
   convertDate(date) {
     var pom = new Date(date);
@@ -114,20 +113,25 @@ export class TimereportingComponent implements OnInit {
     return result;
   }
   editTimereport(timereport: Timereport) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.width = "400px";
-    dialogConfig.autoFocus = true;
-    let dialogRef = this.dialog.open(EdittimereportComponent, dialogConfig);
-    dialogRef.componentInstance.data = timereport;
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      if (result == "Edit") {
-        this.getTimereports();
-      }
-      this.dialogResult = result;
+    if (timereport.project != null) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = "400px";
+      dialogConfig.autoFocus = true;
+      let dialogRef = this.dialog.open(EdittimereportComponent, dialogConfig);
+      dialogRef.componentInstance.data = timereport;
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if (result == "Edit") {
+          this.getTimereportsByDate();
+        }
+        this.dialogResult = result;
 
-    })
+      })
+    }
+    else{
+      this.onCreate();
+    }
   }
   clickNextWeek() {
     let currentweeks = moment(this.currentDate);
@@ -143,7 +147,7 @@ export class TimereportingComponent implements OnInit {
     var fromDate = moment(this.startDate.toString());
     var toDate = moment(this.endDate.toString());
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-      .subscribe((list:Array<Timereport>)=>{
+      .subscribe((list: Array<Timereport>) => {
         this.timereports = list;
         this.fillData();
       });
@@ -162,10 +166,10 @@ export class TimereportingComponent implements OnInit {
     var fromDate = moment(this.startDate.toString());
     var toDate = moment(this.endDate.toString());
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-      .subscribe((list:Array<Timereport>)=> {
+      .subscribe((list: Array<Timereport>) => {
         this.timereports = list;
         this.fillData();
-    });
+      });
   }
   getTimereportsByDate() {
     this.timereports = new Array<Timereport>();
@@ -174,45 +178,61 @@ export class TimereportingComponent implements OnInit {
     var fromDate = moment(this.startDate.toString());
     var toDate = moment(this.endDate.toString());
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
-      .subscribe((list:Array<Timereport>)=> {
+      .subscribe((list: Array<Timereport>) => {
         this.timereports = list;
+        console.log(this.timereports);
         this.fillData();
 
       });
   }
 
-  fillData() { 
-      this.rows = new Array<Row>();
-      this.projects.forEach(project => {
-        let row = new Row();
-        row.project = project;
-        row.timereports = new Array<Timereport>();
-        this.fillTimereport(row);
-        this.rows.push(row);
-      });
-  }
-  fillTimereport(row:Row){
-      var currentDate = moment(this.startDate.toString());
-      var endDate = moment(this.endDate.toString());
-      while(true){
-        if(currentDate>=endDate){
-          break;
-        }
-        currentDate = currentDate.add('day',1);
-        let timereport = this.findTimereport(row.project.id,currentDate.toDate());
-        row.timereports.push(timereport);
-      }
-  }
-  findTimereport(projectId:Number,date:Date):Timereport{
-    this.timereports.forEach(timereport => {
-      var current = moment(date).format('YYYY-MM-DD');
-       if(projectId==timereport.project.id && current==timereport.date.toString()){
-         return timereport;
-      }
+  fillData() {
+    this.rows = new Array<Row>();
+    this.projects.forEach(project => {
+      let row = new Row();
+      row.project = project;
+      row.timereports = new Array<Timereport>();
+      this.fillTimereport(row);
+      this.rows.push(row);
     });
-    return new Timereport(0,null,date,null,null);
   }
+  fillTimereport(row: Row) {
+    var currentDate = moment(this.startDate.toString());
+    var endDate = moment(this.endDate.toString());
+    currentDate = currentDate.subtract('day', 1);
+    endDate = endDate.subtract('day', 1);
+    while (true) {
+      if (currentDate > endDate) {
+        break;
+      }
+      currentDate = currentDate.add('day', 1);
+      let timereport = this.findTimereport(row.project.id, currentDate.toDate());
+      row.timereports.push(timereport);
 
+    }
+  }
+  findTimereport(projectId: Number, date: Date): Timereport {
+    let timereportId;
+
+    for (var i = 0; i < this.timereports.length; i++) {
+      var current = moment(date).format('YYYY-MM-DD');
+      if (projectId == this.timereports[i].project.id && current == this.timereports[i].date.toString()) {
+        timereportId = this.timereports[i].id;
+        return this.timereports[i];
+      }
+      timereportId = this.timereports[i].id;
+    }
+    var currentProject = this.getProjectById(projectId);
+    return new Timereport(0, timereportId, date, null, currentProject);
+
+  }
+  getProjectById(projectId): Project {
+    var currentProject: Project;
+    this.projectService.getProjectById(projectId).subscribe((project: Project) => {
+      return project;
+    });
+    return null;
+  }
 
 
 

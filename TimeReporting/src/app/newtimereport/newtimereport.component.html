@@ -1,12 +1,15 @@
 
 <div class="timereportsDays mat-dialog-container">
   <form id="addRow" class="form-group">
+    <label>Date</label>
     <mat-form-field class="calendarreport" >
       <input  matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" name="date" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <label>Hours</label>
     <input class="form-control mat-form-field-required-marker" type="number" [(ngModel)]="hours" placeholder="Hours" name="hours" [min]="1" ><br>
+    <label>Employee</label>
     <input *ngIf="role.id!==1" class="form-control" [(ngModel)]="selectedEmployee.firstName" disabled name="employee">
     <mat-form-field *ngIf="role.id===1" >
       <mat-label>Select employee</mat-label>
@@ -14,6 +17,7 @@
         <mat-option *ngFor="let employee of employees" [value]="employee" >{{employee.firstName + " "+ employee.lastName}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <label>Project</label>
     <mat-form-field>
       <mat-label>Select project</mat-label>
       <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProjectId($event)" name="project">

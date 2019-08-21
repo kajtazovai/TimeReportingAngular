@@ -13,8 +13,7 @@
   <button class=" btn btn-default nextWeek" (click)="clickNextWeek()"> 
     Next week
     <i class="glyphicon glyphicon-chevron-right icons-next"></i>
-  </button>
-  <button class="btn btn-success " (click)="searchWithDate()">Search</button><br>
+  </button><br>
   <label>Current week: {{fromtoweeks}}</label>
   <table class="table table-bordered mat-table timereportsTable">
     <thead>
@@ -33,10 +32,7 @@
     <tbody>
       <tr *ngFor="let row of rows">
         <td>{{row.project.name}}</td>
-        <td *ngFor="let col of row.timereports" ><app-userreport [timereport]='col'></app-userreport></td>
-        <!-- <td><button class="btn btn-default edit-btn" id="{{timereport.id}}" (click)="editTimereport(timereport)"><i
-              class="glyphicon glyphicon-pencil icons"></i></button> <button class="btn btn-danger remove-btn"
-            (click)="deleteTimereport(timereport.id)"><i class="glyphicon glyphicon-remove icons"></i></button></td> -->
+        <td *ngFor="let col of row.timereports" (click)=editTimereport(col)><app-userreport [timereport]='col'></app-userreport></td>
       </tr>
     </tbody>
   </table>

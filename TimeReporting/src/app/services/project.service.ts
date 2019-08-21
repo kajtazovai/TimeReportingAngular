@@ -12,7 +12,7 @@ export class ProjectService {
   constructor(private http:HttpClient) {
 
   }
-  createProject(name:string,budget:number){
+  createProject(name:string,budget:Number){
     var body = {
       "name":name,
       "budget":budget
@@ -22,11 +22,11 @@ export class ProjectService {
   getProjects(){
     return this.http.get("http://localhost:8080/projects")
   }
-  getProjectById(id:number){
+  getProjectById(id:Number){
     return this.http.get("http://localhost:8080/projects/"+id);
   }
 
-  deleteById(id: number) {
+  deleteById(id: Number) {
     return this.http.delete('http://localhost:8080/projects/'+id).subscribe();
   }
 

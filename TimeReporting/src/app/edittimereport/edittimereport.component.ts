@@ -37,7 +37,7 @@ export class EdittimereportComponent implements OnInit {
 
   ngOnInit() {
     this.selected = this.data.projectName;
-    this.selectedProject = new Project(this.data.projectName,this.data.projectId,this.data.budget);
+    this.selectedProject = this.data.project;
     this.hours = this.data.hours;
     var dateTimereport = new Date(this.data.date);
     this.employeeId = this.data.employeeId;
@@ -67,7 +67,6 @@ export class EdittimereportComponent implements OnInit {
   changeDate(event) {
     var date = new Date(event.toString());
     this.date=date;
-    console.log(this.date);
   }
 
   changeHours(event) {

@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class TimeService {
 
   constructor(private http:HttpClient) { }
-  createTime(date:Date,hours:number,employeeId:number,projectId:number):Observable<Object> {
+  createTime(date:Date,hours:Number,employeeId:Number,projectId:Number):Observable<Object> {
     return this.http.post("http://localhost:8080/timereports",{
       "date":date,
       "hours":hours,
