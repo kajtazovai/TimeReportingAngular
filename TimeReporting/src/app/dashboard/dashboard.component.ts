@@ -1,58 +1,158 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import {TimeService} from "../services/time.service";
-import {Timereport} from "../models/timereport";
-import {Project} from "../models/project";
+import { TimeService } from "../services/time.service";
+import { Timereport } from "../models/timereport";
+import { Project } from "../models/project";
+import * as moment from 'moment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  chart:Chart;
-  hoursChart:Chart;
-  salary:number;
-  hours:number;
-  timereports:Array<Timereport>;
-  constructor(private timereportService:TimeService) {
+  chart: Chart;
+  hoursChart: Chart;
+  salary: number;
+  hours: number;
+  timereports: Array<Timereport>;
+  selectedStatistics: String;
+  statistics: Array<String>;
+  currentDate: Date;
+  fromtoweeks: String;
+  startDate: String;
+  endDate: String;
+  month: String;
+  days: String;
+  constructor(private timereportService: TimeService) {
+    this.timereports = new Array<Timereport>();
+    this.salary = 0;
+    this.hours=0;
   }
 
   ngOnInit() {
-    this.getTimereportsHours();
-  }
-  getTimereportsHours(){
     this.timereports = new Array<Timereport>();
+    this.getTimereportsHours();
+    this.statistics = new Array<String>();
+    this.statistics.push('This week');
+    this.statistics.push('This month');
+    this.statistics.push('This year');
+    this.selectedStatistics = this.statistics[0];
+    this.getCurrentDate(this.selectedStatistics);
+  }
+  getCurrentDate($value) {
+    if (String($value) === "This year") {
+      this.getTimereportsForThisYear();
+    }
+    if (String($value) === "This month") {
+      this.getTimereportsForThisMonth();
+    }
+    else {
+      this.getTimereportsForWeek();
+    }
+
+  }
+  getTimereportsForWeek() {
+    var session = window.sessionStorage.getItem('user');
+    var parsedSession = JSON.parse(session);
+    let currentweeks = moment();
+    var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+    var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+    this.fromtoweeks = start.toString() + " to " + end.toString();
+    this.currentDate = new Date(currentweeks.toString());
+    this.startDate = start.toString();
+    this.endDate = end.toString();
+    var fromDate = moment(this.startDate.toString());
+    var toDate = moment(this.endDate.toString());
+    this.timereports = new Array<Timereport>();
+    this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
+      .subscribe((list: Array<Timereport>) => {
+        for(var i=0;i<list.length;i++){
+          this.timereports.push(list[i]);
+        }
+        this.getTimereportsHours();
+      });
+  }
+  getTimereportsForThisMonth() {
+    var session = window.sessionStorage.getItem('user');
+    var parsedSession = JSON.parse(session);
+    let currentweeks = moment();
+    var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+    var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+    this.fromtoweeks = start.toString() + " to " + end.toString();
+    this.currentDate = new Date(currentweeks.toString());
+    this.startDate = start.toString();
+    this.month = String(currentweeks.month() + 1);
+    this.startDate = '2019-' + this.getMonth(this.month) + '-01';
+    this.days = currentweeks.days().toString();
+    this.endDate = end.toString();
+    var fromDate = moment(this.startDate.toString());
+    var toDate = moment(this.endDate.toString());
+    this.timereports = new Array<Timereport>();
+    this.salary =0;
+    this.hours=0;
+    this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
+      .subscribe((list: Array<Timereport>) => {
+        for(var i=0;i<list.length;i++){
+          this.timereports.push(list[i]);
+        }
+        this.getTimereportsHours();
+      });
+  }
+  getTimereportsForThisYear() {
+    var session = window.sessionStorage.getItem('user');
+    var parsedSession = JSON.parse(session);
+    let currentweeks = moment();
+    var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+    var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+    this.fromtoweeks = start.toString() + " to " + end.toString();
+    this.currentDate = new Date(currentweeks.toString());
+    this.startDate = start.toString();
+    var year  = String(currentweeks.year());
+    this.startDate = String(year) + '-01' + '-01';
+    this.days = currentweeks.days().toString();
+    this.endDate = String(year) + '-12-'+'31';
+    var fromDate = moment(this.startDate.toString());
+    var toDate = moment(this.endDate.toString());
+    this.timereports = new Array<Timereport>();
+    this.salary =0;
+    this.hours=0;
+    this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
+      .subscribe((list: Array<Timereport>) => {
+        for(var i=0;i<list.length;i++){
+          this.timereports.push(list[i]);
+        }
+        this.getTimereportsHours();
+      });
+  }
+  getMonth($month){
+    if($month<10){
+      return '0'+$month;
+    }
+    else{
+      return $month;
+    }
+
+  }
+  getTimereportsHours() {
     var pom = 0;
     var session = window.sessionStorage.getItem('user');
-    this.timereportService.getTimereports().subscribe((list:Array<Timereport>)=> {
-      let array = list;
-      for (var i = 0; i < array.length; i++) {
-        var hours = array[i].hours;
-        var employeeId = array[i].employee.id;
-        var projectId = array[i].project.id;
-        var employeeName =array[i].employee.firstName;
-        var projectName =array[i].project.name;
-        var id = array[i].id;
-        var date = array[i].date;
-        var parsedSession = JSON.parse(session);
-        if (employeeId === parsedSession.id) {
-          pom+=array[i].hours;
-        }
-      }
-      this.hours = pom;
-      var parsedSession = JSON.parse(session);
-      if(parsedSession.role.id==1){
-      this.salary = this.hours*2500;
-      }
-      else{
-        this.salary = this.hours*1500;
-      }
-      this.createChart();
-    });
+    let array = this.timereports;
+    for (var i = 0; i < array.length; i++) {
+        pom += array[i].hours;
+    }
+    this.hours = pom;
+    var parsedSession = JSON.parse(session);
+    if (parsedSession.role.id == 1) {
+      this.salary = (this.hours * 2500) / 61.5;
+    }
+    else {
+      this.salary = (this.hours * 1500) / 61.5;
+    }
+    this.createChart();
   }
-  createChart(){
+  createChart() {
     var hours = [this.hours];
-    var salary  = [this.salary];
+    var salary = [this.salary];
     this.chart = new Chart('salary', {
       type: 'bar',
       data: {
@@ -102,6 +202,9 @@ export class DashboardComponent implements OnInit {
       }
     });
 
+  }
+  changeStatistics($event) {
+    this.getCurrentDate($event);
   }
 
 }

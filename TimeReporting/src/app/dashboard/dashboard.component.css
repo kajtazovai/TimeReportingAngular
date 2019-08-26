@@ -2,6 +2,7 @@
   width: 300px;
   height: 300px;
   margin-top: 110px;
+  margin-left: 30px;
 }
 .salaryChart{
   width: 300px;
@@ -11,5 +12,14 @@
 .statistics{
   float: left;
   clear: both;
+  margin-left: 30px;
 }
-
+.dropdownlist{
+  margin-top:70px;
+  margin-left: 10px;
+  height: 70px;
+  margin-bottom: -120px;
+}
+.label-statistics{
+  margin-right: 20px;
+}

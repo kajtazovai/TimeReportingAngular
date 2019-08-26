@@ -54,7 +54,6 @@ export class TimeService {
   getTimereportsByDate(startDate:Date,endDate:Date,employeeId:Number):Observable<Object>{
     var start = moment(startDate.toISOString()).format('YYYY-MM-DD');
     var end = moment(endDate.toISOString()).format('YYYY-MM-DD');
-    console.log(start + " " +end );
     return this.http.get("http://localhost:8080/timereports/filterByDate?startDate="+start.toString()+"&endDate="+end.toString()+"&employeeId="+employeeId);
   }
 

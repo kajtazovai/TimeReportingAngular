@@ -1,4 +1,12 @@
 <app-header></app-header>
+<div class="dropdownlist">
+    <label class="label-statistics">Choose statistics:</label>
+    <mat-form-field>
+        <mat-select  [(ngModel)]="selectedStatistics" (ngModelChange)="changeStatistics($event)">
+          <mat-option *ngFor="let statistic of statistics" [value]="statistic" >{{statistic}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
 <div class="mychart pull-left">
  <canvas id="salary" width="150px" height="150px">{{chart}}</canvas>
 </div>
@@ -8,6 +16,6 @@
 </div>
 <br>
 <div class="statistics">
-  <h4><label>Total Salary: {{salary}}</label> </h4>
-  <h4><label>Total Hours: {{hours}}</label> </h4>
+  <h4><label >Total Salary: {{salary | number : '1.2-2'}} €</label> </h4>
+  <h4><label>Total Hours: {{hours}} hours</label> </h4>
 </div>

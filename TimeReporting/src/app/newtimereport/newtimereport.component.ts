@@ -52,7 +52,6 @@ export class NewtimereportComponent implements OnInit {
   }
   createTime(){
     var date = moment(this.date);
-    date = date.add('day',1);
     var currentDate = date.format('YYYY-MM-DD');
     if(this.hours!=null && this.selectedEmployee.id!=null && this.selectedProject.id!=null){
       this.timereportService.createTime(new Date(currentDate.toString()), this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {

@@ -23,7 +23,7 @@ export class ProjectService {
     return this.http.get("http://localhost:8080/projects")
   }
   getProjectById(id:Number){
-    return this.http.get("http://localhost:8080/projects/"+id);
+    return this.http.get("http://localhost:8080/projects/"+id,{responseType:'text'});
   }
 
   deleteById(id: Number) {

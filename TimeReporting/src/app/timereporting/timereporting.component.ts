@@ -180,7 +180,6 @@ export class TimereportingComponent implements OnInit {
     this.timereportService.getTimereportsByDate(fromDate.toDate(), toDate.toDate(), parsedSession.id)
       .subscribe((list: Array<Timereport>) => {
         this.timereports = list;
-        console.log(this.timereports);
         this.fillData();
 
       });
@@ -228,9 +227,12 @@ export class TimereportingComponent implements OnInit {
   }
   getProjectById(projectId): Project {
     var currentProject: Project;
-    this.projectService.getProjectById(projectId).subscribe((project: Project) => {
-      return project;
+    this.projectService.getProjectById(projectId).subscribe(text => {
+      var projectParsed = JSON.parse(text);
+      console.log(projectParsed);
+      return new Project(projectParsed.name,projectParsed.id,projectParsed.budget);
     });
+
     return null;
   }
 
