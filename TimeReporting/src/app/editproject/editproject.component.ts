@@ -12,9 +12,10 @@ import {Timereport} from "../models/timereport";
   styleUrls: ['./editproject.component.css']
 })
 export class EditprojectComponent implements OnInit {
-  name:string;
-  budget:number;
-  id:number;
+  name:String;
+  budget:Number;
+  id:Number;
+  hourlyPaid:Number;
   selectedProject:Project;
 
   constructor(private  projectService:ProjectService,@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<ProjectComponent>) { }
@@ -23,6 +24,7 @@ export class EditprojectComponent implements OnInit {
     this.name=this.data.name;
     this.budget = this.data.budget;
     this.id = this.data.id;
+    this.hourlyPaid = this.data.hourlyPaid;
 
   }
   onCloseCancel() {
@@ -30,7 +32,7 @@ export class EditprojectComponent implements OnInit {
   }
 
   editProject() {
-    this.selectedProject = new Project(this.name,this.id,this.budget);
+    this.selectedProject = new Project(String(this.name),this.id,this.budget,this.hourlyPaid);
     this.projectService.editProject(this.selectedProject);
     this.dialogRef.close("Edit");
     alert("Successfully edited");
@@ -44,6 +46,14 @@ export class EditprojectComponent implements OnInit {
     }
     else{
       this.budget =$event;
+    }
+  }
+  changeHourlyPaid($event){
+    if($event==0){
+      this.hourlyPaid=1;
+    }
+    else{
+      this.hourlyPaid=$event;
     }
   }
 }

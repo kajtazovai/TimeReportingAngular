@@ -18,6 +18,7 @@ import {EditprojectComponent} from "../editproject/editproject.component";
 export class ProjectComponent implements OnInit {
   name:string;
   budget:number;
+  hourlyPaid:Number;
   projects:Array<Project>;
   dialogResult = "";
   constructor(private projectService : ProjectService,private router:Router ,private dialog :MatDialog) { }
@@ -39,7 +40,7 @@ export class ProjectComponent implements OnInit {
   }
   createProject(){
     if(this.name!="" && this.budget!=null) {
-      this.projectService.createProject(this.name, this.budget).subscribe(text => {
+      this.projectService.createProject(this.name, this.budget,this.hourlyPaid).subscribe(text => {
         if (this.name != "" && this.budget != null) {
           alert("Successfull create project");
           this.getProjects();

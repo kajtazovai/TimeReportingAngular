@@ -1,7 +1,11 @@
 <app-header></app-header>
 <div class="projectAdd">
+  <label>Name:</label>
   <input class="form-control" type="text"  [(ngModel)]="name" placeholder="Name project" name="name"><br>
+  <label>Budget:</label>
   <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget project" name="budget" [min]="1"><br>
+  <label>Hourly Paid:</label>
+  <input class="form-control" type="number" [(ngModel)]="hourlyPaid" placeholder="Hourly paid project" name="hourlyPaid" [min]="1"><br>
   <button class="form-control btn btn-success" (click)="createProject()">Create project</button>
 </div><br>
 <div>
@@ -11,7 +15,8 @@
       <th>Id</th>
       <th>Name</th>
       <th>Budget</th>
-      <td></td>
+      <th>Hourly Paid</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +24,7 @@
       <td>{{project.id}}</td>
       <td>{{project.name}}</td>
       <td> {{project.budget}}</td>
+      <td>{{project.hourlyPaid}}</td>
       <td><button class="btn btn-default editButton edit-btn" id="{{project.id}}" (click)="editProject(project)"><i class="glyphicon glyphicon-pencil icons"></i></button><button class="btn btn-danger remove-btn" (click)="deleteProject(project.id)"><i class="glyphicon glyphicon-remove icons"></i></button></td>
     </tr>
     </tbody>

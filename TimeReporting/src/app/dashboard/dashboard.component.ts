@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   endDate: String;
   month: String;
   days: String;
+  projectReports:String;
   constructor(private timereportService: TimeService) {
     this.timereports = new Array<Timereport>();
     this.salary = 0;
@@ -137,17 +138,14 @@ export class DashboardComponent implements OnInit {
     var pom = 0;
     var session = window.sessionStorage.getItem('user');
     let array = this.timereports;
+    this.salary=0;
+    this.projectReports='';
     for (var i = 0; i < array.length; i++) {
         pom += array[i].hours;
-    }
+        this.projectReports=this.projectReports+"   "+array[i].project.name+" - "+array[i].hours+" x "+array[i].project.hourlyPaid+"\n";
+        this.salary += (array[i].hours*Number(array[i].project.hourlyPaid))/61.5;
+      }
     this.hours = pom;
-    var parsedSession = JSON.parse(session);
-    if (parsedSession.role.id == 1) {
-      this.salary = (this.hours * 2500) / 61.5;
-    }
-    else {
-      this.salary = (this.hours * 1500) / 61.5;
-    }
     this.createChart();
   }
   createChart() {

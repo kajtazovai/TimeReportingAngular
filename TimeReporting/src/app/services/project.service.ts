@@ -12,10 +12,11 @@ export class ProjectService {
   constructor(private http:HttpClient) {
 
   }
-  createProject(name:string,budget:Number){
+  createProject(name:string,budget:Number,hourlyPaid:Number){
     var body = {
       "name":name,
-      "budget":budget
+      "budget":budget,
+      "hourlyPaid":hourlyPaid
     }
     return this.http.post("http://localhost:8080/projects",body);
   }
@@ -34,7 +35,8 @@ export class ProjectService {
     return this.http.put('http://localhost:8080/projects',{
       "id":selectedProject.id,
       "name":selectedProject.name,
-      "budget":selectedProject.budget
+      "budget":selectedProject.budget,
+      "horlyPaid":selectedProject.hourlyPaid
     },{
       'responseType':'text'
     }).subscribe();

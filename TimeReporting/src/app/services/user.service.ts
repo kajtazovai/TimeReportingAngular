@@ -35,6 +35,8 @@ export class UserService {
       },
       "projects": [{
         "id": project.id,
+        "name":project.name,
+        "budget":project.budget
       }]
     }, {
         responseType: "arraybuffer"
