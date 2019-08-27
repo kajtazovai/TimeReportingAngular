@@ -230,7 +230,7 @@ export class TimereportingComponent implements OnInit {
     this.projectService.getProjectById(projectId).subscribe(text => {
       var projectParsed = JSON.parse(text);
       console.log(projectParsed);
-      return new Project(projectParsed.name,projectParsed.id,projectParsed.budget);
+      return new Project(projectParsed.name,projectParsed.id,projectParsed.budget,projectParsed.hourlyPaid);
     });
 
     return null;
