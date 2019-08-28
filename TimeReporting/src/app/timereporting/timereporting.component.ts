@@ -44,13 +44,13 @@ export class TimereportingComponent implements OnInit {
   }
   ngOnInit() {
     var pom = window.sessionStorage.getItem('user');
+    let parsedUser=JSON.parse(pom);
     if (pom != null) {
       this.projects = new Array<Project>();
       this.getCurrentDate();
-      this.projectService.getProjects().subscribe((text: Array<Project>) => {
-        this.projects = text;
-        this.getTimereportsByDate();
-      })
+      this.projects = parsedUser.projects;
+      this.getTimereportsByDate();
+      
     }
     else {
       this.router.navigate(['/login']);

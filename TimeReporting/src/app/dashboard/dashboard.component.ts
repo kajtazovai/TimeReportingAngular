@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     if (String($value) === "This year") {
       this.getTimereportsForThisYear();
     }
-    if (String($value) === "This month") {
+    else if (String($value) === "This month") {
       this.getTimereportsForThisMonth();
     }
     else {
@@ -137,13 +137,12 @@ export class DashboardComponent implements OnInit {
   getTimereportsHours() {
     var pom = 0;
     var session = window.sessionStorage.getItem('user');
-    let array = this.timereports;
     this.salary=0;
-    this.projectReports='';
-    for (var i = 0; i < array.length; i++) {
-        pom += array[i].hours;
-        this.projectReports=this.projectReports+"   "+array[i].project.name+" - "+array[i].hours+" x "+array[i].project.hourlyPaid+"\n";
-        this.salary += (array[i].hours*Number(array[i].project.hourlyPaid))/61.5;
+    this.projectReports="";
+    for (var i = 0; i < this.timereports.length; i++) {
+        pom += this.timereports[i].hours;
+        this.projectReports=this.projectReports+"   "+this.timereports[i].project.name+" - "+this.timereports[i].hours+" x "+this.timereports[i].project.hourlyPaid+" $ \n";
+        this.salary += (this.timereports[i].hours*Number(this.timereports[i].project.hourlyPaid));
       }
     this.hours = pom;
     this.createChart();

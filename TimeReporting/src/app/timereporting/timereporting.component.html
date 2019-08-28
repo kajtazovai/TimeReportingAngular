@@ -31,7 +31,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let row of rows">
-        <td>{{row.project.name}}</td>
+        <td class="projectName">{{row.project.name}}</td>
         <td *ngFor="let col of row.timereports" (click)=editTimereport(col)><app-userreport [timereport]='col'></app-userreport></td>
       </tr>
     </tbody>

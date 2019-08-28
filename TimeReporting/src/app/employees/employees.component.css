@@ -17,6 +17,18 @@
   width: 20px;
   height: 25px;
 }
+thead{
+  background-color: orangered;
+  color: Black;
+}
+th{
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+tr{
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .icons{
   font-size: 10px;
   text-align: center;

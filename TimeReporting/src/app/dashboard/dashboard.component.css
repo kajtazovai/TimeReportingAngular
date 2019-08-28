@@ -23,3 +23,7 @@
 .label-statistics{
   margin-right: 20px;
 }
+p{
+  white-space: pre-wrap;
+  font-size:12px;
+}

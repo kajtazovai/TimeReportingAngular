@@ -20,7 +20,7 @@ export class UserService {
         'responseType': "json"
       });
   }
-  createUser(firstname: string, lastname: string, embg: string, datejoining: Date, username: string, password: string, email: string, role:Role, project: Project): Observable<Object> {
+  createUser(firstname: string, lastname: string, embg: string, datejoining: Date, username: string, password: string, email: string, role: Role, projects: Array<Project>): Observable<Object> {
     return this.http.post('http://localhost:8080/employee', {
       "firstName": firstname,
       "lastName": lastname,
@@ -33,11 +33,7 @@ export class UserService {
         "id": role.id,
         "name": role.name
       },
-      "projects": [{
-        "id": project.id,
-        "name":project.name,
-        "budget":project.budget
-      }]
+      "projects": projects
     }, {
         responseType: "arraybuffer"
       });
@@ -47,9 +43,8 @@ export class UserService {
     return this.http.get("http://localhost:8080/employee");
   }
   editUser(employee: Employee) {
-  
-    return this.http.put("http://localhost:8080/employee", {
-      "id":employee.id,
+    var req = {
+      "id": employee.id,
       "firstName": employee.firstName,
       "lastName": employee.lastName,
       "embg": employee.embg,
@@ -57,16 +52,23 @@ export class UserService {
       "username": employee.username,
       "password": employee.password,
       "email": employee.email,
-      "role":{
-        "id":employee.role.id,
-        "name":employee.role.name,
-      }
-    }, {
-        'responseType': 'text'
-      }).subscribe();
+      "role": {
+        "id": employee.role.id,
+        "name": employee.role.name,
+      },
+      "projects": []
+    }
+    for (var i = 0; i < employee.projects.length; i++) {
+      var project = { "name": employee.projects[i].name, "budget": employee.projects[i].budget, "id": employee.projects[i].id, "hourlyPaid": employee.projects[i].hourlyPaid };
+      req.projects.push(project);
+    }
+
+    return this.http.put("http://localhost:8080/employee", req, {
+      responseType: "arraybuffer"
+    }).subscribe();
   }
-  removeEmployee(id:Number){
-    this.http.delete('http://localhost:8080/employee/'+id).subscribe();
+  removeEmployee(id: Number) {
+    this.http.delete('http://localhost:8080/employee/' + id).subscribe();
   }
-  
+
 }

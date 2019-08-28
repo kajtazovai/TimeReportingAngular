@@ -41,6 +41,22 @@
         (ngModelChange)="changePassword($event)"><br>
       <p [(ngModel)]="password" *ngIf="password==''" class="text-danger">*Insert password</p>
     </div>
+    <mat-form-field>
+        <mat-label>Select project</mat-label>
+        <mat-select [(ngModel)]="selectedProject"   (ngModelChange)="changeProjectId($event)" name="project">
+          <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <div>
+        <table class="choosedProjects">
+            <tr>
+                <th>Projects</th>
+            </tr>
+            <tr *ngFor="let project of choosedProjects" >
+                <td>{{project.name}} <button class="btn btn-small btn-danger remove-btn" (click)="removeChoosedProjects(project)"><i class="glyphicon glyphicon-remove icons"></i></button></td>
+            </tr>
+        </table>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-6"><button class="form-control btn btn-success" (click)="editEmployee()">Save</button></div>

@@ -1,6 +1,7 @@
 .timereportsDays{
+  margin:0 auto;
   margin-top: 150px;
-  margin-left: 50px;
+  width: 1000px;
 }
 .calendarTimereport{
     width: 100%;
@@ -11,8 +12,22 @@
 
 }
 thead{
-  background-color: lightslategray;
-  color: blue;
+  background-color: orangered;
+  color: Black;
+}
+th{
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+tr{
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.projectName{
+  color: black ;
+  text-align: center;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 .calendarreport{
   margin-left: 20px;

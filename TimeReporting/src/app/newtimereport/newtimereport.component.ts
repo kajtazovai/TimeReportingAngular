@@ -38,17 +38,14 @@ export class NewtimereportComponent implements OnInit {
     var parsed = JSON.parse(session);
     this.role = new Role(parsed.role.id,parsed.role.name);
     if(this.role.id!==1) {
-      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role);
+      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
     }
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();
     this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
-      console.log(text);
       this.employees = text;
     })
-    this.projectService.getProjects().subscribe((text:Array<Project>)=>{
-      this.projects = text;
-    })
+    this.projects = parsed.projects;
   }
   createTime(){
     var date = moment(this.date);

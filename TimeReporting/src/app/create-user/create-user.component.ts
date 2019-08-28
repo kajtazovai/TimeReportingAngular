@@ -22,9 +22,11 @@ export class CreateUserComponent implements OnInit {
   projects: Array<Project>;
   selectedRole: Role;
   selectedProject: Project;
+  choosedProjects:Array<Project>
   constructor(private userService: UserService, private router: Router, private projectService: ProjectService) { }
 
   ngOnInit() {
+    this.choosedProjects = new Array<Project>();
     this.projects = new Array<Project>();
     this.roles = new Array<Role>();
     this.projectService.getRoles().subscribe((text: Array<Role>) => {
@@ -35,8 +37,8 @@ export class CreateUserComponent implements OnInit {
     });
   }
   createUser() {
-    if (this.firstname != "" && this.lastname != "" && this.embg != "" && this.username != "" && this.password != "" && this.datejoining != null && this.selectedRole != null) {
-      this.userService.createUser(this.firstname, this.lastname, this.embg, this.datejoining, this.username, this.password, this.email, this.selectedRole, this.selectedProject).subscribe(data => {
+    if (this.firstname != "" && this.lastname != "" && this.embg != "" && this.username != "" && this.password != "" && this.datejoining != null && this.selectedRole != null && this.choosedProjects!=null ) {
+      this.userService.createUser(this.firstname, this.lastname, this.embg, this.datejoining, this.username, this.password, this.email, this.selectedRole, this.choosedProjects).subscribe(data => {
         alert("Successfull create user");
         this.router.navigate(['employees']);
       });
@@ -48,11 +50,21 @@ export class CreateUserComponent implements OnInit {
 
   }
   changeRole($event) {
-    console.log($event);
     this.selectedRole = $event;
   }
   changeProjectId($event) {
-    this.selectedProject = $event;
+    this.choosedProjects.push($event);
+    var array = this.projects;
+    this.projects = new Array<Project>();
+    for(var i=0;i<array.length;i++){
+      if($event.id==array[i].id){
+        continue;
+      }
+      else{
+        this.projects.push(array[i]);
+      }
+
+    }
   }
 
 
