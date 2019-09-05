@@ -130,7 +130,20 @@ export class TimereportingComponent implements OnInit {
       })
     }
     else{
-      this.onCreate();
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.width = "400px";
+      dialogConfig.autoFocus = true;
+      let dialogRef = this.dialog.open(NewtimereportComponent, dialogConfig);
+      dialogRef.componentInstance.data = timereport;
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if (result == "Edit") {
+          this.getTimereportsByDate();
+        }
+        this.dialogResult = result;
+
+      })
     }
   }
   clickNextWeek() {
@@ -221,20 +234,12 @@ export class TimereportingComponent implements OnInit {
       }
       timereportId = this.timereports[i].id;
     }
-    var currentProject = this.getProjectById(projectId);
+    var currentProject:Project;
+    this.projectService.getProjectById(projectId).toPromise().then()
     return new Timereport(0, timereportId, date, null, currentProject);
 
   }
-  getProjectById(projectId): Project {
-    var currentProject: Project;
-    this.projectService.getProjectById(projectId).subscribe(text => {
-      var projectParsed = JSON.parse(text);
-      console.log(projectParsed);
-      return new Project(projectParsed.name,projectParsed.id,projectParsed.budget,projectParsed.hourlyPaid);
-    });
-
-    return null;
-  }
+  
 
 
 

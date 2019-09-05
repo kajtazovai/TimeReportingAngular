@@ -61,7 +61,7 @@
                 <th>Projects</th>
             </tr>
             <tr *ngFor="let project of choosedProjects" >
-                <td>{{project.name}}</td>
+                <td>{{project.name}} <button class="btn btn-small btn-danger remove-btn" (click)="removeChoosedProjects(project)"><i class="glyphicon glyphicon-remove icons"></i></button></td>
             </tr>
         </table>
     </div>

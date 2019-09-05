@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Project} from "../models/project";
 import {Timereport} from "../models/timereport";
 import {TimeService} from "../services/time.service";
-import { MatDialogRef ,MatDialogContent} from "@angular/material";
+import { MatDialogRef ,MatDialogContent, MAT_DIALOG_DATA} from "@angular/material";
 import {Employee} from "../models/employee";
 import {UserService} from "../services/user.service";
 import {ProjectService} from "../services/project.service";
@@ -31,21 +31,38 @@ export class NewtimereportComponent implements OnInit {
   selectedEmployee:Employee;
   selectedProject: Project;
   role:Role;
-  data;
-  constructor(private timereportService  : TimeService,public dialogRef: MatDialogRef<NewtimereportComponent>,private employeeService:UserService,private  projectService:ProjectService) { }
+  selected:String;
+  projectName = String;
+  haveData:Boolean;
+  constructor(private timereportService  : TimeService,public dialogRef: MatDialogRef<NewtimereportComponent>,private employeeService:UserService,private  projectService:ProjectService,@Inject(MAT_DIALOG_DATA) public data: any) { }
   ngOnInit() {
     var session  = window.sessionStorage.getItem('user');
     var parsed = JSON.parse(session);
     this.role = new Role(parsed.role.id,parsed.role.name);
-    if(this.role.id!==1) {
-      this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
-    }
+    this.haveData = false;
+   if(this.data!=undefined){
+     this.haveData=true;
+    this.selected = this.data.projectName;
+    this.selectedProject = this.data.project;
+    this.hours = this.data.hours;
+    var dateTimereport = new Date(this.data.date);
+    this.employeeId = this.data.employeeId;
+    this.projectId = this.data.projectId;
+    this.date = dateTimereport;
+    this.projectName = this.data.projectName;
+    this.selectedEmployee = new Employee(parsed.id,parsed.firstName,parsed.lastName,parsed.username,parsed.password,parsed.email,parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
+    this.projects = new Array<Project>();
+    console.log(this.data.projects) 
+    this.projects = parsed.projects;
+   }else{
+    this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
     this.projects = new Array<Project>();
     this.employees = new Array<Employee>();
     this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
       this.employees = text;
     })
     this.projects = parsed.projects;
+   }
   }
   createTime(){
     var date = moment(this.date);

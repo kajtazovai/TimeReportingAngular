@@ -1,5 +1,5 @@
 
-<div class="timereportsDays mat-dialog-container">
+<div *ngIf="!haveData" class="timereportsDays mat-dialog-container">
   <form id="addRow" class="form-group">
     <label>Date</label>
     <mat-form-field class="calendarreport" >
@@ -31,3 +31,28 @@
     </div>
   </form>
 </div>
+<div *ngIf="haveData"class="timereportsDays mat-dialog-container form-control">
+  <div id="addRow">
+    <mat-form-field class="calendarreport">
+      <label>Date</label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <label>Hours</label>
+    <input class="form-control" type="number" [(ngModel)]="hours" placeholder="Hours" (ngModelChange)="changeHours($event)" [min]="1"><br>
+    <label>First and Last Name</label>
+    <input class="form-control" type="text" [value]="selectedEmployee.firstName+' '+ selectedEmployee.lastName" disabled><br>
+    <label>Project Name</label>
+    <mat-form-field>
+      <mat-label>{{selectedProject.name}}</mat-label>
+      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProject($event)">
+        <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="row">
+      <div class="col-md-6"><button class="form-control btn btn-success" (click)="editTimereport()">Save</button></div>
+      <div class="col-md-6"><button class="form-control btn btn-danger" (click)="onCloseCancel()">Cancel</button></div>
+
+    </div>
+  </div>

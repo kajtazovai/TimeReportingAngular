@@ -23,3 +23,18 @@ legend{
     width: 100px;
     text-align: center;
 }
+.remove-btn{
+    text-align: center;
+    float: right;
+    width: 10px;
+    height: 25px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+}
+.icons{
+    font-size: 10px;
+    text-align: center;
+    top: -4px;
+    right: 4px;
+    
+  }

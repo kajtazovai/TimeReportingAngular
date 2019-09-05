@@ -66,6 +66,20 @@ export class CreateUserComponent implements OnInit {
 
     }
   }
+  removeChoosedProjects($event) {
+    this.projects.push($event);
+    var array = this.choosedProjects;
+    this.choosedProjects = new Array<Project>();
+    for (var i = 0; i < array.length; i++) {
+      if ($event.id == array[i].id) {
+        continue;
+      }
+      else {
+        this.choosedProjects.push(array[i]);
+      }
+
+    }
+  }
 
 
 }
