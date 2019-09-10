@@ -40,6 +40,7 @@ export class NewtimereportComponent implements OnInit {
     var parsed = JSON.parse(session);
     this.role = new Role(parsed.role.id,parsed.role.name);
     this.haveData = false;
+    this.selectedProject = this.data.project;
    if(this.data!=undefined){
      this.haveData=true;
     this.selected = this.data.projectName;
@@ -52,7 +53,6 @@ export class NewtimereportComponent implements OnInit {
     this.projectName = this.data.projectName;
     this.selectedEmployee = new Employee(parsed.id,parsed.firstName,parsed.lastName,parsed.username,parsed.password,parsed.email,parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
     this.projects = new Array<Project>();
-    console.log(this.data.projects) 
     this.projects = parsed.projects;
    }else{
     this.selectedEmployee = new Employee(parsed.id, parsed.firstName, parsed.lastName, parsed.username, parsed.password, parsed.email, parsed.dateJoining,parsed.embg,parsed.role,parsed.projects);
@@ -73,7 +73,7 @@ export class NewtimereportComponent implements OnInit {
 
           this.dialogRef.close("Create");
           alert("Succesfull added timereport");
-
+          
         }
       });
     }
@@ -95,5 +95,8 @@ export class NewtimereportComponent implements OnInit {
   changeEmployee($event) {
     console.log($event)
     this.selectedEmployee= $event;
+  }
+  changeHours($event){
+    this.hours = $event;
   }
 }

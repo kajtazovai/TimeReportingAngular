@@ -38,19 +38,20 @@ export class TimereportingComponent implements OnInit {
   startDate: String;
   endDate: String;
   rows: Array<Row>;
+  currentProject: Project;
 
   constructor(private timereportService: TimeService, private dialog: MatDialog, private router: Router, private projectService: ProjectService) {
     this.timereports = new Array<Timereport>();
   }
   ngOnInit() {
     var pom = window.sessionStorage.getItem('user');
-    let parsedUser=JSON.parse(pom);
+    let parsedUser = JSON.parse(pom);
     if (pom != null) {
       this.projects = new Array<Project>();
       this.getCurrentDate();
       this.projects = parsedUser.projects;
       this.getTimereportsByDate();
-      
+
     }
     else {
       this.router.navigate(['/login']);
@@ -113,7 +114,7 @@ export class TimereportingComponent implements OnInit {
     return result;
   }
   editTimereport(timereport: Timereport) {
-    if (timereport.project != null) {
+    if (timereport.employee != null) {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.width = "400px";
@@ -129,7 +130,7 @@ export class TimereportingComponent implements OnInit {
 
       })
     }
-    else{
+    else {
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.width = "400px";
@@ -138,7 +139,7 @@ export class TimereportingComponent implements OnInit {
       dialogRef.componentInstance.data = timereport;
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
-        if (result == "Edit") {
+        if (result == "Create") {
           this.getTimereportsByDate();
         }
         this.dialogResult = result;
@@ -218,29 +219,30 @@ export class TimereportingComponent implements OnInit {
         break;
       }
       currentDate = currentDate.add('day', 1);
-      let timereport = this.findTimereport(row.project.id, currentDate.toDate());
+      let timereport = this.findTimereport(row.project, currentDate.toDate());
       row.timereports.push(timereport);
 
     }
   }
-  findTimereport(projectId: Number, date: Date): Timereport {
+  findTimereport(project: Project, date: Date): Timereport {
     let timereportId;
 
     for (var i = 0; i < this.timereports.length; i++) {
       var current = moment(date).format('YYYY-MM-DD');
-      if (projectId == this.timereports[i].project.id && current == this.timereports[i].date.toString()) {
+      if (project.id == this.timereports[i].project.id && current == this.timereports[i].date.toString()) {
         timereportId = this.timereports[i].id;
         return this.timereports[i];
       }
       timereportId = this.timereports[i].id;
     }
-    var currentProject:Project;
-    this.projectService.getProjectById(projectId).toPromise().then()
-    return new Timereport(0, timereportId, date, null, currentProject);
+    return new Timereport(0, timereportId, date, null, project);
 
   }
-  
-
-
-
+  getProjectById(id: Number){
+    this.projectService.getProjectById(id).subscribe(response=>{
+      var parsed = JSON.stringify(response);
+      var json = JSON.parse(parsed);
+      this.currentProject = new Project(json.name,json.id,json.budget,json.hourlyPaid);
+    })
+  }
 }

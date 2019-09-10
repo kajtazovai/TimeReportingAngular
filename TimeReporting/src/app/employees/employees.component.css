@@ -36,3 +36,10 @@ tr{
   right: 4px;
   
 }
+.reports{
+  margin-left: 5px;
+  height: 25px;
+  position: relative;
+  text-align: center;
+  padding-top: 0px;
+}

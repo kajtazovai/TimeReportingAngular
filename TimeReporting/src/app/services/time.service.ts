@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Timereport} from "../models/timereport";
 import * as moment from 'moment';
+import { Employee } from '../models/employee';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,7 @@ export class TimeService {
     var end = moment(endDate.toISOString()).format('YYYY-MM-DD');
     return this.http.get("http://localhost:8080/timereports/filterByDate?startDate="+start.toString()+"&endDate="+end.toString()+"&employeeId="+employeeId);
   }
-
+  getTimereportsByEmployee(employee:Employee):Observable<Object>{
+    return this.http.get('http://localhost:8080/timereports/employee/'+employee.id);
+  }
 }

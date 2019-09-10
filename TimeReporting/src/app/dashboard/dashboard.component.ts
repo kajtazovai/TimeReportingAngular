@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
     this.timereports = new Array<Timereport>();
     this.getTimereportsHours();
     this.statistics = new Array<String>();
+    this.statistics.push('Today');
     this.statistics.push('This week');
     this.statistics.push('This month');
     this.statistics.push('This year');
@@ -47,10 +48,32 @@ export class DashboardComponent implements OnInit {
     else if (String($value) === "This month") {
       this.getTimereportsForThisMonth();
     }
+    else if (String($value)==="Today"){
+      this.getTimereportsForToday();
+    }
     else {
       this.getTimereportsForWeek();
     }
 
+  }
+  getTimereportsForToday(){
+    var session = window.sessionStorage.getItem('user');
+    var parsedSession = JSON.parse(session);
+    let currentweeks = moment();
+    var start = moment(currentweeks).startOf('isoWeek').format('YYYY-MM-DD');
+    var end = moment(currentweeks).endOf('isoWeek').format('YYYY-MM-DD');
+    this.fromtoweeks = start.toString() + " to " + end.toString();
+    this.currentDate = new Date(currentweeks.toString());
+    var fromDate = moment(currentweeks.year()+"-"+this.getMonth(currentweeks.month()+1)+"-"+this.getDay(currentweeks.date()));
+    this.timereports = new Array<Timereport>();
+    console.log(fromDate);
+    this.timereportService.getTimereportsByDate(fromDate.toDate(), fromDate.toDate(), parsedSession.id)
+      .subscribe((list: Array<Timereport>) => {
+        for(var i=0;i<list.length;i++){
+          this.timereports.push(list[i]);
+        }
+        this.getTimereportsHours();
+      });
   }
   getTimereportsForWeek() {
     var session = window.sessionStorage.getItem('user');
@@ -133,6 +156,14 @@ export class DashboardComponent implements OnInit {
       return $month;
     }
 
+  }
+  getDay($day){
+    if($day<10){
+      return '0'+$day;
+    }
+    else{
+      return $day;
+    }
   }
   getTimereportsHours() {
     var pom = 0;

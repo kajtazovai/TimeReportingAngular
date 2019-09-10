@@ -7,6 +7,7 @@ import {Role} from "../models/role";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EdituserComponent } from '../edituser/edituser.component';
 import { DeleteemployeeComponent } from '../deleteemployee/deleteemployee.component';
+import { TimeService } from '../services/time.service';
 
 @Component({
   selector: 'app-employees',
@@ -18,7 +19,7 @@ export class EmployeesComponent implements OnInit {
   isLogin : boolean;
   role:Role;
   dialogResult: any;
-  constructor(private employeeService:UserService,private router:Router ,private dialog :MatDialog) { }
+  constructor(private employeeService:UserService,private router:Router ,private dialog :MatDialog,private timereportService:TimeService) { }
 
   ngOnInit() {
     this.employeeService.getUsers().subscribe((text:Array<Employee>)=>{
@@ -84,6 +85,12 @@ export class EmployeesComponent implements OnInit {
     else{
       this.isLogin=false;
     }
+  }
+  viewReports(employee:Employee){
+    this.timereportService.getTimereportsByEmployee(employee).subscribe(result=>{
+      console.log(result);
+    })
+
   }
 
 }
