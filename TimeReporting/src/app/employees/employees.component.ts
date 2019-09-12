@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Employee} from "../models/employee";
 import {UserService} from "../services/user.service";
 import {Project} from "../models/project";
-import {Router} from "@angular/router";
+import {Router, NavigationExtras} from "@angular/router";
 import {Role} from "../models/role";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { EdituserComponent } from '../edituser/edituser.component';
 import { DeleteemployeeComponent } from '../deleteemployee/deleteemployee.component';
 import { TimeService } from '../services/time.service';
+import { Timereport } from '../models/timereport';
 
 @Component({
   selector: 'app-employees',
@@ -87,10 +88,9 @@ export class EmployeesComponent implements OnInit {
     }
   }
   viewReports(employee:Employee){
-    this.timereportService.getTimereportsByEmployee(employee).subscribe(result=>{
-      console.log(result);
-    })
-
+    window.localStorage.setItem('employeeId',JSON.stringify(employee));
+    this.router.navigate(['/reports']);
+    
   }
 
 }

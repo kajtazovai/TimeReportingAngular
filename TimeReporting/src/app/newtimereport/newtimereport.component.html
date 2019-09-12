@@ -1,7 +1,7 @@
 
 <div *ngIf="!haveData" class="timereportsDays mat-dialog-container">
   <form id="addRow" class="form-group">
-    <label>Date</label>
+    <label>Select Date</label>
     <mat-form-field class="calendarreport">
       <label>Date</label>
       <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
@@ -35,7 +35,7 @@
 <div *ngIf="haveData"class="timereportsDays mat-dialog-container form-control">
   <div id="addRow">
     <mat-form-field class="calendarreport">
-      <label>Date</label>
+      <label>Select Date</label>
       <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

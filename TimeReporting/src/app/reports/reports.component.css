@@ -1,0 +1,8 @@
+.timereports{
+    margin-top: 100px;
+    width: 700px;
+    margin-left: 100px;
+}
+.timereports table{
+    border: 1px solid black;
+}

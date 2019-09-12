@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="timereports">
+    <h2 >Timereports for employee: {{name}}</h2>
+  <table class="table table-bordered table-striped mat-table" style="border: 1px black">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timereport of timereports" >
+        <td>{{timereport.project.name}}</td>
+        <td>{{timereport.hours}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+<button class="btn btn-info" (click)="backToEmployee()">Back to employees</button>
+</div>
+<button></button>
