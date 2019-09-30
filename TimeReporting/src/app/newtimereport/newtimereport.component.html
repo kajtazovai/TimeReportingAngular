@@ -36,7 +36,7 @@
   <div id="addRow">
     <mat-form-field class="calendarreport">
       <label>Select Date</label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" disabled>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -47,8 +47,8 @@
     <label>Project Name</label>
     <mat-form-field>
       <mat-label>{{selectedProject.name}}</mat-label>
-      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProject($event)">
-        <mat-option *ngFor="let project of projects" [value]="project" >{{project.name}}</mat-option>
+      <mat-select  [(ngModel)]="selectedProject" (ngModelChange)="changeProject($event)" disabled>
+        <mat-option *ngFor="let project of projects" [value]="project"disabled >{{project.name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="row">
