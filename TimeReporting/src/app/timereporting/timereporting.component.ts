@@ -122,11 +122,11 @@ export class TimereportingComponent implements OnInit {
       let dialogRef = this.dialog.open(EdittimereportComponent, dialogConfig);
       dialogRef.componentInstance.data = timereport;
       dialogRef.afterClosed().subscribe(result => {
+        this.dialogResult = result;
         console.log(`Dialog closed: ${result}`);
         if (result == "Edit") {
           this.getTimereportsByDate();
         }
-        this.dialogResult = result;
 
       })
     }

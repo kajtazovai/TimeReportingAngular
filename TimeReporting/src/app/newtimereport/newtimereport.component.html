@@ -4,12 +4,12 @@
     <label>Select Date</label>
     <mat-form-field class="calendarreport">
       <label>Date</label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (ngModelChange)="changeDate($event)" >
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dateForNewTimereport" (ngModelChange)="changeDate($event)" name="dateForNewTimereport">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <label>Hours</label>
-    <input class="form-control mat-form-field-required-marker" type="number" [(ngModel)]="hours" placeholder="Hours" name="hours" [min]="1" ><br>
+    <input class="form-control mat-form-field-required-marker" type="number" [(ngModel)]="hours" placeholder="Hours" name="hours" [min]="1" (ngModelChange)="changeHours($event)"><br>
     <label>Employee</label>
     <input *ngIf="role.id!==1" class="form-control" [(ngModel)]="selectedEmployee.firstName" disabled name="employee">
     <mat-form-field *ngIf="role.id===1" >

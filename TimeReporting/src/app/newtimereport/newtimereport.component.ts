@@ -34,6 +34,7 @@ export class NewtimereportComponent implements OnInit {
   selected: String;
   projectName = String;
   haveData: Boolean;
+  dateForNewTimereport:Date;
   constructor(private timereportService: TimeService, public dialogRef: MatDialogRef<NewtimereportComponent>, private employeeService: UserService, private projectService: ProjectService, @Inject(MAT_DIALOG_DATA) public data: any) { }
   ngOnInit() {
     var session = window.sessionStorage.getItem('user');
@@ -65,14 +66,12 @@ export class NewtimereportComponent implements OnInit {
       this.projectService.getProjects().subscribe((text: Array<Project>) => {
         this.projects = text;
       })
-      console.log(this.employees);
-      console.log(this.projects);
     }
   }
   createTime() {
+    var date = moment(this.date);
+    var currentDate = date.format('YYYY-MM-DD');
     if (this.haveData) {
-      var date = moment(this.date);
-      var currentDate = date.format('YYYY-MM-DD');
       this.timereportService.createTime(new Date(currentDate.toString()), this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
         if (this.date != null && this.hours > 0) {
 
@@ -83,15 +82,11 @@ export class NewtimereportComponent implements OnInit {
       });
     }
     else if (!this.haveData){
-      var date = moment(this.date);
-      var currentDate = date.format('YYYY-MM-DD');
-      this.timereportService.createTime(this.date, this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
-        if (this.date != null && this.hours > 0) {
-
+      var currentdate = moment(this.dateForNewTimereport);
+      var newdate = currentdate.format('YYYY-MM-DD');
+      this.timereportService.createTime(new Date(newdate.toString()), this.hours, this.selectedEmployee.id, this.selectedProject.id).subscribe(text => {
           this.dialogRef.close("Create");
           alert("Succesfull added timereport");
-
-        }
       });
     }
     else {
@@ -115,6 +110,6 @@ export class NewtimereportComponent implements OnInit {
     this.hours = $event;
   }
   changeDate($event){
-    this.date=$event;
+    this.dateForNewTimereport=$event;
   }
 }
