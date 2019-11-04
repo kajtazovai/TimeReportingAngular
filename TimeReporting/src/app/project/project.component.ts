@@ -46,6 +46,7 @@ export class ProjectComponent implements OnInit {
           this.getProjects();
           this.name="";
           this.budget=null;
+          this.hourlyPaid=null;
         }
       });
     }

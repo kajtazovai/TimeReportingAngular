@@ -23,6 +23,7 @@ export class CreateUserComponent implements OnInit {
   selectedRole: Role;
   selectedProject: Project;
   choosedProjects:Array<Project>
+  embgRequired:boolean;
   constructor(private userService: UserService, private router: Router, private projectService: ProjectService) { }
 
   ngOnInit() {
@@ -37,16 +38,20 @@ export class CreateUserComponent implements OnInit {
     });
   }
   createUser() {
-    if (this.firstname != "" && this.lastname != "" && this.embg != "" && this.username != "" && this.password != "" && this.datejoining != null && this.selectedRole != null && this.choosedProjects!=null ) {
+    if(this.embg.length!=13){
+      this.embgRequired = true;
+    }
+    else if (this.firstname != "" && this.lastname != "" && this.embg != "" && this.username != "" && this.password != "" && this.datejoining != null && this.selectedRole != null && this.choosedProjects!=null ) {
+      this.embgRequired=false;
       this.userService.createUser(this.firstname, this.lastname, this.embg, this.datejoining, this.username, this.password, this.email, this.selectedRole, this.choosedProjects).subscribe(data => {
-        alert("Successfull create user");
-        this.router.navigate(['employees']);
       });
+      alert("Successfull create user");
+      this.router.navigate(['employees']);
+      this.embgRequired=false;
     }
     else {
       alert("All fields are mandatory");
     }
-
 
   }
   changeRole($event) {
@@ -80,6 +85,4 @@ export class CreateUserComponent implements OnInit {
 
     }
   }
-
-
 }

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<form class="login-form">
+<form class="login-form" name="employee">
     <div class="row">
         <div class="col-md-6">
             <div class="form-field">
@@ -16,6 +16,7 @@
                 <label class="form-group">Embg</label><br>
                 <input placeholder="ex.0305961487017" class="form-group form-control" type="text" name="embg"
                     [(ngModel)]="embg">
+             <span *ngIf="embgRequired" class="label-danger" style="color:white">The embg must be 13 numbers.</span><br>
             </div>
             <div class="form-field">
                 <label class="form-group">Date of Joining</label><br>

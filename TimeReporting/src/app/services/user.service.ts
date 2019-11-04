@@ -21,7 +21,7 @@ export class UserService {
       });
   }
   createUser(firstname: string, lastname: string, embg: string, datejoining: Date, username: string, password: string, email: string, role: Role, projects: Array<Project>): Observable<Object> {
-    return this.http.post('http://localhost:8080/employee', {
+    var req =  {
       "firstName": firstname,
       "lastName": lastname,
       "embg": embg,
@@ -34,7 +34,13 @@ export class UserService {
         "name": role.name
       },
       "projects": projects
-    }, {
+    }
+    // for (var i = 0; i < projects.length; i++) {
+    //   var project = { "name": projects[i].name, "budget":projects[i].budget, "id": projects[i].id, "hourlyPaid": projects[i].hourlyPaid };
+    //   req.projects.push(project);
+    // }
+    
+    return this.http.post('http://localhost:8080/employee',req, {
         responseType: "arraybuffer"
       });
 

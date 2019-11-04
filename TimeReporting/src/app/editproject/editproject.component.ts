@@ -32,10 +32,15 @@ export class EditprojectComponent implements OnInit {
   }
 
   editProject() {
+    if(this.budget!=0 && this.hourlyPaid!=0 && this.name!=""){
     this.selectedProject = new Project(String(this.name),this.id,this.budget,this.hourlyPaid);
     this.projectService.editProject(this.selectedProject);
     this.dialogRef.close("Edit");
     alert("Successfully edited");
+    }
+    else{
+      alert("All values is required");
+    }
   }
   changeName($event){
     this.name= $event;
@@ -52,8 +57,6 @@ export class EditprojectComponent implements OnInit {
     if($event==0){
       this.hourlyPaid=1;
     }
-    else{
-      this.hourlyPaid=$event;
-    }
+   this.hourlyPaid=$event;
   }
 }

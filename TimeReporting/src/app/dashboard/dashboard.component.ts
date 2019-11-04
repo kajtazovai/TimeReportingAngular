@@ -66,7 +66,6 @@ export class DashboardComponent implements OnInit {
     this.currentDate = new Date(currentweeks.toString());
     var fromDate = moment(currentweeks.year()+"-"+this.getMonth(currentweeks.month()+1)+"-"+this.getDay(currentweeks.date()));
     this.timereports = new Array<Timereport>();
-    console.log(fromDate);
     this.timereportService.getTimereportsByDate(fromDate.toDate(), fromDate.toDate(), parsedSession.id)
       .subscribe((list: Array<Timereport>) => {
         for(var i=0;i<list.length;i++){

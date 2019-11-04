@@ -6,7 +6,7 @@
       <label>Budget</label>
       <input class="form-control" type="number" [(ngModel)]="budget" placeholder="Budget" (ngModelChange)="changeBudget($event)" min="1"><br>
       <label>Hourly paid</label>
-      <input class="form-control" type="number" [(ngModel)]="hourlyPaid" placeholder="Hourly Paid" (ngModelChange)="changeHourlyPaid($event)" min="1"><br>
+      <input class="form-control" type="number" [(ngModel)]="hourlyPaid" placeholder="Hourly Paid" (ngModelChange)="changeHourlyPaid($event)" min="1" name="hourlyPaid"><br>
     
       <div class="row">
       <div class="col-md-6"><button class="form-control btn btn-success" (click)="editProject()">Save</button></div>

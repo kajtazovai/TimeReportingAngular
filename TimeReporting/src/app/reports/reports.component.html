@@ -6,12 +6,14 @@
       <tr>
         <th>Project</th>
         <th>Hours</th>
+        <th>Date</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let timereport of timereports" >
         <td>{{timereport.project.name}}</td>
         <td>{{timereport.hours}}</td>
+        <td>{{timereport.date}}</td>
       </tr>
     </tbody>
   </table>
